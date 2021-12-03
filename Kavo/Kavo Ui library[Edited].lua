@@ -276,9 +276,8 @@ function Kavo.CreateLib(kavName, themeList)
     close.Size = UDim2.new(0, 21, 0, 21)
     close.ZIndex = 2
     close.Image = "rbxassetid://3926305904"
-    close.ImageTransparency = 0
-    close.ImageRectOffset = Vector2.new(284, 4)
-    close.ImageRectSize = Vector2.new(25, 25)
+    close.ImageRectOffset = Vector2.new(0,0)
+    close.ImageRectSize = Vector2.new(0,0)
     close.MouseButton1Click:Connect(function()
         game.TweenService:Create(close, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
             ImageTransparency = 1
