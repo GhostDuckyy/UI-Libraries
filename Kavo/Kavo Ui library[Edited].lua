@@ -274,8 +274,8 @@ function Kavo.CreateLib(kavName, themeList)
     close.BackgroundTransparency = 1.000
     close.Position = UDim2.new(0.949999988, 0, 0.137999997, 0)
     close.Size = UDim2.new(0, 21, 0, 21)
-    close.ZIndex = 2
-    close.Image = "rbxassetid://7838941422"
+    close.ZIndex = 1
+    close.Image = "http://www.roblox.com/asset/?id=8161918504"
     close.ImageRectOffset = Vector2.new(0,0)
     close.ImageRectSize = Vector2.new(0,0)
     close.MouseButton1Click:Connect(function()
