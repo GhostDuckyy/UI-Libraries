@@ -120,7 +120,7 @@ local themeStyles = {
         ElementColor = Color3.fromRGB(22, 29, 31)
     },
    -- Made by Myself!
-   Discord = {
+    DiscordTheme = {
         SchemeColor = Color3.fromRGB(92,100,244),
         Background = Color3.fromRGB(54,57,63),
         Header = Color3.fromRGB(47,49,54),
