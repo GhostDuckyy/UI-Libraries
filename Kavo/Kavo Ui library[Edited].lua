@@ -121,11 +121,12 @@ local themeStyles = {
     },
    -- Made by Myself!
    Discord = {
-    SchemeColor = Color3.fromRGB(92,100,244),
-    Background = Color3.fromRGB(54,57,63),
-    Header = Color3.fromRGB(47,49,54),
-    TextColor = Color3.fromRGB(210,221,212),
-    ElementColor = Color3.fromRGB(47,49,54)
+        SchemeColor = Color3.fromRGB(92,100,244),
+        Background = Color3.fromRGB(54,57,63),
+        Header = Color3.fromRGB(47,49,54),
+        TextColor = Color3.fromRGB(210,221,212),
+        ElementColor = Color3.fromRGB(47,49,54)
+    },
 }
 
 local oldTheme = ""
