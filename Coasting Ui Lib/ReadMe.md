@@ -1,4 +1,4 @@
-# Vr3millon: <link>https://v3rmillion.net/showthread.php?pid=7590437#pid7590437</>
+# Vr3millon: <a href="https://v3rmillion.net/showthread.php?pid=7590437#pid7590437" target="_blank">Here</a> 
 
 # Source: https://pastebin.com/raw/3gQQtaKX
 
