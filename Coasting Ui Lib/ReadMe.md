@@ -1,4 +1,4 @@
-# Vr3millon: https://v3rmillion.net/showthread.php?tid=1071849&pid=7590441
+# Vr3millon: https://v3rmillion.net/showthread.php?pid=7590437#pid7590437
 
 # Documentation: https://pastebin.com/raw/7HkS6SBJ
 
