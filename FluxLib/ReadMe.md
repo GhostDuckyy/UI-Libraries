@@ -3,5 +3,5 @@
 
 **Note**
 ```
-Litte Fix FluxLib colorpicker title not working!
+Fix FluxLib colorpicker title not working!
 ```
