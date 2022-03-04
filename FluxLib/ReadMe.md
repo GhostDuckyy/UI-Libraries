@@ -3,6 +3,5 @@
 
 **Note**
 ```
-[Fix] FluxLib colorpicker title not working
-[Added] Flux:destroy()
+[Fix]: FluxLib colorpicker title not working
 ```
