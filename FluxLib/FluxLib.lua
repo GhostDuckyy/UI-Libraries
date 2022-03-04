@@ -86,13 +86,6 @@ local function MakeDraggable(topbarobject, object)
 end
 
 
-function Flux:destroy()
-	local v = game:GetService("CoreGui"):FindFirstChild(FluxLib.Name)
-	if v then
-		v:Destroy()
-	end
-end
-
 
 function Flux:Window(text, bottom,mainclr,toclose)
 	CloseBind = toclose or Enum.KeyCode.RightControl
