@@ -87,8 +87,9 @@ end
 
 
 function Flux:destroy()
-	if game:GetService("CoreGui"):FindFirstChild(FluxLib) then
-		game:GetService("CoreGui"):FindFirstChild(FluxLib):Destroy()
+	local v = game:GetService("CoreGui"):FindFirstChild(FluxLib.Name)
+	if v then
+		v:Destroy()
 	end
 end
 
