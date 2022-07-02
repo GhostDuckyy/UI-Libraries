@@ -2,7 +2,7 @@
 `uwuware.lua` is form onigrinal thread
 https://v3rmillion.net/showthread.php?tid=1023792
 
-`source.lua` is form grf
+`source.lua`  and `example.lua`  is form grf
 https://garfieldscripts.xyz/uis
 
 # Preview:
