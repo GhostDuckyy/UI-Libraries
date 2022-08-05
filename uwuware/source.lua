@@ -1607,7 +1607,6 @@ end
 local UIToggle
 local UnlockMouse
 function library:Init()
-	
 	self.base = self.base or self:Create("ScreenGui")
 	if syn and syn.protect_gui then
 		syn.protect_gui(self.base)
@@ -1620,6 +1619,8 @@ function library:Init()
 		return
 	end
 	self.base.Parent = game:GetService"CoreGui"
+	self.base.ResetOnSpawn = false
+	self.base.Name = "uwuware"
 	
 	self.cursor = self.cursor or self:Create("Frame", {
 		ZIndex = 100,
@@ -1636,6 +1637,7 @@ function library:Init()
 			loadOptions(window)
 		end
 	end
+	return self.base
 end
 
 function library:Close()
