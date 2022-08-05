@@ -3,5 +3,5 @@ Made by jans
 
 # Change log:
 `
-Exchange get_hidden_gui to gethui
+Add gethui in Library:Init() function
 `
