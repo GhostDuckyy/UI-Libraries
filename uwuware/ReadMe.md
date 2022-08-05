@@ -3,5 +3,5 @@ Made by jans
 
 # Change log:
 `
-Fixed out-dated get_hidden_gui
+Exchange get_hidden_gui to gethui
 `
