@@ -3,10 +3,8 @@
 
 [example](https://github.com/GhostDuckyy/Ui-Librarys/blob/main/ImGui/Fluxus/example.lua) / [raw](https://raw.githubusercontent.com/GhostDuckyy/Ui-Librarys/main/ImGui/Fluxus/example.lua)
 
-**Preview:**
-<video controls poster="https://cdn.discordapp.com/attachments/975680363458338830/1010375573492736091/2022-08-19_22-26-50.mp4">
-  <source src="https://cdn.discordapp.com/attachments/975680363458338830/1010375573492736091/2022-08-19_22-26-50.mp4" type="video/mp4">
-</video>
+### Preview:
+https://cdn.discordapp.com/attachments/975680363458338830/1010375573492736091/2022-08-19_22-26-50.mp4
 ## Fluxus
 [website](https://fluxteam.net/) | [discord](https://fluxteam.net/external-files/discord.php)
 ### ImGui change-log
