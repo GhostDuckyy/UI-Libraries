@@ -12,7 +12,7 @@ Example:
 ```lua
 local dropdown = Sector:Cheat("Dropdown","dropdown",function(x)
     print(x)
-end,{options = {"Apple","Banana","Dick"}})
+end,{options = {"Apple","Banana","Cat","Dick"}})
 
 local t = dropdown:GetOption() -- Return dropdown options [table]
 for i,v in next, (t) do
@@ -20,8 +20,10 @@ for i,v in next, (t) do
 end
 --[[
     Output:
-      1 Apple [Index, Value]
-      2 Banana [Index, Value]
-      3 Dick [Index, Value]
+     [Index, Value]
+       1 Apple
+       2 Banana
+       3 Cat
+       4 Dick
 ]]
 ```
