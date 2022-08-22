@@ -7,6 +7,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librar
 ## Change log:
 
 [+] Added: **`GetOption()`**
+
+Example:
 ```lua
 local dropdown = Sector:Cheat("Dropdown","dropdown",function(x)
     print(x)
