@@ -983,6 +983,10 @@ function finity.new(isdark, gprojectName, thinProject)
 							refreshOptions()
 						end
 						
+						function cheat:GetOption()
+							return 	options;
+						end
+						
 						function cheat:SetValue(value)
 							cheat.selected.Text = value
 							cheat.value = value
