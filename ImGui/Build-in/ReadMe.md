@@ -5,8 +5,11 @@
 
 ## Supported exploit
 **Fluxus**
+
 [website](https://fluxteam.net/) / [discord](https://fluxteam.net/external-files/discord.php)
-### Fluxus change-log
+
+**change log**
+
 Fluxus added Build-in **ImGui** ( Working-in-progress ) - 10:31 a.m. Saturday, 20 August 2022
 
 Fluxus added **Sections** in **ImGui** - 10:26 p.m. Sunday, 21 August 2022
