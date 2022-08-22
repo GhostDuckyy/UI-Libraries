@@ -6,6 +6,8 @@
 ### Preview:
 https://cdn.discordapp.com/attachments/975680363458338830/1010375573492736091/2022-08-19_22-26-50.mp4
 ## Fluxus
-[website](https://fluxteam.net/) | [discord](https://fluxteam.net/external-files/discord.php)
+[website](https://fluxteam.net/) / [discord](https://fluxteam.net/external-files/discord.php)
 ### ImGui change-log
-Fluxus added Build-in **IMGUI** Librarys ( Working-in-progress ) - 10:31 a.m. Saturday, 20 August 2022
+Fluxus added Build-in **ImGui** ( Working-in-progress ) - 10:31 a.m. Saturday, 20 August 2022
+
+Fluxus added **Sections** in **ImGui** - 10:26 p.m. Sunday, 21 August 2022
