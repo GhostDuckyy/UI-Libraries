@@ -8,7 +8,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librar
 
 **[+] Added:** GetOption()
 ```lua
-local t = dropdown:GetOption() --Return [table]
+local t = dropdown:GetOption() -- Return dropdown options [table]
 for i,v in next, (t) do
   print(i,v)
 end
