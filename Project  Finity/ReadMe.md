@@ -18,8 +18,8 @@ for i,v in next, (t) do
 end
 --[[
     Output:
-      1 Apple (Index, Value)
-      2 Banana (Index, Value)
-      3 Dick (Index, Value)
+      1 Apple [Index, Value]
+      2 Banana [Index, Value]
+      3 Dick [Index, Value]
 ]]
 ```
