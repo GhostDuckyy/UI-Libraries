@@ -20,7 +20,7 @@ for i,v in next, (t) do
 end
 --[[
     Output:
-     [Index, Value]
+     -> Index, Value
        1 Apple
        2 Banana
        3 Cat
