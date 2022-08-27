@@ -1,5 +1,7 @@
-# ReadMe
+## ReadMe
 Made by [**ZCute**](https://v3rmillion.net/member.php?action=profile&uid=1431869) / [**Thread**](https://v3rmillion.net/showthread.php?pid=8349869#pid8349869) <V3rmillion>
+### Github
+[**Repository**](https://github.com/Rain-Design/Libraries/tree/main/Shaman) | [**source**](https://github.com/Rain-Design/Libraries/blob/main/Shaman/Library.lua) / [**raw**](https://raw.githubusercontent.com/Rain-Design/Libraries/main/Shaman/Library.lua)
 ### Documentation:
 ```cs
 Library: {
