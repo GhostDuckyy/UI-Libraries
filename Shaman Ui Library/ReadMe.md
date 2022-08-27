@@ -249,3 +249,6 @@ label:Set({
 
 a:Set(true)
 ```
+### Picture:
+![photo 1](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_1.png)
+![photo 2](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_2.png)
