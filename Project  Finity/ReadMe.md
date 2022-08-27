@@ -5,8 +5,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librar
 ```
 
 ## Change log:
-
 [+] Added: **`GetOption()`**
+
 [+] Added: **`ClearOption()`**
 
 Example:
