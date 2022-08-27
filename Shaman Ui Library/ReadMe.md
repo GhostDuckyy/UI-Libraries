@@ -35,7 +35,7 @@ Library: {
                Flag: <string>
                Callback: <function>
                Set: function {
-                   <boolean> {Set(true/false)}
+                   <boolean> {Set(true / false)}
                }
            }
            Slider: <function> {
