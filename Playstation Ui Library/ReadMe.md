@@ -1,4 +1,4 @@
-# Documentation
+## Documentation / Example
 ```lua
 local Link = loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostDuckyy/Ui-Librarys/main/Playstation%20Ui%20Library/Source'))()
 
