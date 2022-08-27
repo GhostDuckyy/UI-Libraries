@@ -4,6 +4,11 @@ Made by [**ZCute**](https://v3rmillion.net/member.php?action=profile&uid=1431869
 [**Repository**](https://github.com/Rain-Design/Libraries/tree/main/Shaman)
 
 [**Source**](https://github.com/Rain-Design/Libraries/blob/main/Shaman/Library.lua) / [**Raw**](https://raw.githubusercontent.com/Rain-Design/Libraries/main/Shaman/Library.lua)
+
+### Picture:
+![photo 1](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_1.png)
+![photo 2](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_2.png)
+
 ### Documentation:
 ```cs
 Library: {
@@ -249,6 +254,3 @@ label:Set({
 
 a:Set(true)
 ```
-### Picture:
-![photo 1](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_1.png)
-![photo 2](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_2.png)
