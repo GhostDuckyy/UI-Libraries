@@ -39,14 +39,14 @@ Library: {
                Flag: <string>
                Callback: <function>
                Set: function {
-                   <boolean> {Set(true / false)}
+                   <boolean> | Example: Set(true / false)
                }
            }
            Slider: <function> {
                Text: <string>
                Tooltip: <string>
                Flag: <string>
-               Postfix: <string> {What comes after the slider value {Example: % / Studs}}
+               Postfix: <string> | What comes after the slider value {Example: % / Studs}
                Default: <number>
                Minimum: <number>
                Maximum: <number>
@@ -55,7 +55,7 @@ Library: {
            Keybind: function {
                Text: <string>
                Tooltip: <string>
-               Default: <Enum.Keycode> {Enum.KeyCode.X}
+               Default: <Enum.Keycode> | Example: Enum.KeyCode.RightControl
                Callback: <function>
            }
            Dropdown: <function> {
@@ -75,7 +75,7 @@ Library: {
                Tooltip: <string>
                Flag: <string>
                Default: <string>
-               Options: <table> {Same as dropdown list but with another name}
+               Options: <table> | Note: Same as dropdown list but with another name
                Callback: <function>
            }
        }
