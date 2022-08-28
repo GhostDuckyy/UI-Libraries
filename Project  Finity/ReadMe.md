@@ -2,7 +2,10 @@
 `source.lua` is added some dropdown function
 
 `modded.lua` is same as `source.lua` but added more theme function
-## Documentation: https://detourious.gitbook.io/project-finity/
+
+**Documentation**: https://detourious.gitbook.io/project-finity/
+
+**Loadstring**:
 
 ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librarys/main/Project%20%20Finity/source.lua", true))();
