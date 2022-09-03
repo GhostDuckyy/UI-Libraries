@@ -1,7 +1,7 @@
 # ReadMe
 `source.lua` is added some dropdown function
 
-`modded.lua` is same as `source.lua` but added more theme function
+`modded.lua` is same as `source.lua` but added more theme (Incoming)
 
 **Documentation**: https://detourious.gitbook.io/project-finity/
 
