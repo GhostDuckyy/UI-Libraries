@@ -5,7 +5,7 @@
 
 **Documentation**: https://detourious.gitbook.io/project-finity/
 
-**Loadstring**:
+## **Loadstring**:
 
 **Default**
 ```lua
