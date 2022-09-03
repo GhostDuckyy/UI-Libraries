@@ -27,7 +27,7 @@ local dropdown = Sector:Cheat("Dropdown","dropdown",function(x)
     print(x)
 end,{options = {"Apple","Banana","Cat","Dick"}})
 
-local t = dropdown:GetOption() -- Return dropdown options [table]
+local t = dropdown:GetOption() -- Return dropdown options <table>
 for i,v in next, (t) do
   print(i,v)
 end
