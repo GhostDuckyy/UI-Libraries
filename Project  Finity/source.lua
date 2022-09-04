@@ -1074,7 +1074,7 @@ function finity.new(isdark, gprojectName, thinProject)
                         end)
                         function cheat:SetValue(value)
                             cheat.value = tostring(value)
-                            cheat.textbox.Text = tostring(val)
+                            cheat.textbox.Text = tostring(value)
                         end
 
 						cheat.background.Parent = cheat.container
@@ -1176,9 +1176,9 @@ function finity.new(isdark, gprojectName, thinProject)
 
 							cheat.value = math.floor((minimum + (maximum - minimum) * percent) * 100) / 100
 							if precise then
-								cheat.numbervalue.Text = math.ceil(tostring(cheat.value)) .. suffix
-							else
 								cheat.numbervalue.Text = tostring(cheat.value) .. suffix
+							else
+								cheat.numbervalue.Text = math.ceil(tostring(cheat.value)) .. suffix
 							end
 
 							if callback then
@@ -1208,11 +1208,11 @@ function finity.new(isdark, gprojectName, thinProject)
 								local percent = size / 150
 
 								cheat.value = math.floor((minimum + (maximum - minimum) * percent) * 100) / 100
-								if precise then
-									cheat.numbervalue.Text = math.ceil(tostring(cheat.value)) .. suffix
-								else
-									cheat.numbervalue.Text = tostring(cheat.value) .. suffix
-								end
+                                if precise then
+                                    cheat.numbervalue.Text = tostring(cheat.value) .. suffix
+                                else
+                                    cheat.numbervalue.Text = math.ceil(tostring(cheat.value)) .. suffix
+                                end
 
 								if callback then
                                     local s, e = pcall(function()
