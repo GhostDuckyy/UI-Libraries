@@ -21,6 +21,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librar
 
 [+] Added: **`ClearOption()`**
 
+[+] Added: **`cheat:SetLabel()`**
+
 Example:
 ```lua
 local dropdown = Sector:Cheat("Dropdown","dropdown",function(x)
@@ -39,6 +41,17 @@ end
        3 Cat
        4 Dick
 ]]
-
 dropdown:ClearOption()
+
+local label = Sector:Cheat("label","1")
+
+local btn = Sector:Cheat("button","nigga",function()
+    print("nigga")
+end)
+
+while task.wait(.5) do
+    label:SetLabel(math.random(1,999))
+    btn:SetLabel(math.random(1,999))
+end
+
 ```
