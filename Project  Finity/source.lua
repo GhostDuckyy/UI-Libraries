@@ -569,6 +569,11 @@ function finity.new(isdark, gprojectName, thinProject)
 					TextXAlignment = Enum.TextXAlignment.Left
 				})
 
+                function cheat:SetLabel(text)
+                    local Text = tostring(text) or tostring("Hello World!")
+                    cheat.label.Text = Text
+                end
+
 				cheat.container	= finity:Create("Frame", {
 					Name = "Container",
 					AnchorPoint = Vector2.new(1, 0.5),
