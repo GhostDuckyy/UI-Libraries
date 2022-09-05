@@ -21,7 +21,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librar
 
 [+] Added: **`ClearOption()`**
 
-[+] Added: **`cheat:SetLabel()`**
+[+] Added: **<void> `Cheat:SetLabel()`**
 
 Example:
 ```lua
