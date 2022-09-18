@@ -1,5 +1,5 @@
 # ReadMe
-I planned to make a cs:go cheat ui
+I planned to make a **Cs:go** cheat ui
 
 ### Preview
 **Idea from this csgo cheat**
