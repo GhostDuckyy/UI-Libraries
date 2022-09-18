@@ -1,8 +1,10 @@
 # ReadMe
-I planned to make a **Cs:go** cheat ui
+I planned to make a **Csgo** cheat ui
 
 ### Preview
-**Idea from this csgo cheat**
+**Idea from this [aristois](https://www.unknowncheats.me/forum/cs-go-releases/334076-aristois-legit-cheat.html) csgo cheat**
 
-https://www.unknowncheats.me/forum/cs-go-releases/334076-aristois-legit-cheat.html
-![a](https://preview.redd.it/agjw5r7y61451.png?width=621&format=png&auto=webp&s=a5dc64f2904a88af9a72bd85cb488406452086e2)
+![a](https://i.imgur.com/hJ8qJUY.png)
+![b](https://i.imgur.com/fZh6QYI.png)
+![c](https://i.imgur.com/rZUfl5M.png)
+![d](https://i.imgur.com/pvpFKIG.png)
