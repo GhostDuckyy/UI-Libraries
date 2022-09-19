@@ -6,7 +6,7 @@ Made by [**ZCute**](https://v3rmillion.net/member.php?action=profile&uid=1431869
 [**Source**](https://github.com/Rain-Design/Libraries/blob/main/Shaman/Library.lua) / [**Raw**](https://raw.githubusercontent.com/Rain-Design/Libraries/main/Shaman/Library.lua)
 
 #### Waypoints
-[Docs](https://github.com/GhostDuckyy/Ui-Librarys/tree/main/Shaman%20Ui%20Library#documentation) [Example](https://github.com/GhostDuckyy/Ui-Librarys/tree/main/Shaman%20Ui%20Library#example)
+[Docs](https://github.com/GhostDuckyy/Ui-Librarys/tree/main/Shaman%20Ui%20Library#documentation) | [Example](https://github.com/GhostDuckyy/Ui-Librarys/tree/main/Shaman%20Ui%20Library#example)
 
 ### Picture:
 ![photo 1](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_1.png)
