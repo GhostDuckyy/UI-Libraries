@@ -2,7 +2,7 @@
 Made by [**Singularity#5490**](https://v3rmillion.net/member.php?action=profile&uid=947830) | [V3rmillion Thread](https://v3rmillion.net/showthread.php?pid=8377526#pid8377526)
 
 ### Loadstring
-[Documentation](https://github.com/Singularity5490/rbimgui-2/blob/main/rbimgui-2-docs.pdf) | [Github](https://github.com/Singularity5490/rbimgui-2)
+[Documentation](https://github.com/Singularity5490/rbimgui-2/blob/main/rbimgui-2-docs.pdf) | [Github repository ](https://github.com/Singularity5490/rbimgui-2)
 ```lua
 local engine = loadstring(game:HttpGet("https://raw.githubusercontent.com/Singularity5490/rbimgui-2/main/rbimgui-2.lua"))()
 ```
