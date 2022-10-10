@@ -13,7 +13,7 @@ loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)()
 ### Preview
 **Video:**
 
-[![video](https://img.youtube.com/vi/182Z-ydB90o/0.jpg)](https://www.youtube.com/watch?v=182Z-ydB90o)
+[![video](https://img.youtube.com/vi/1_Qd4E9BFRs/0.jpg)](https://www.youtube.com/watch?v=1_Qd4E9BFRs)
 
 **Picture:**
 
