@@ -490,7 +490,7 @@ function Library:AddWindow(options)
 	
 	local function loadConfig(filePath)
 		local s, config = pcall(function()
-			return HS:JSONDecode(readfile(Library.Settings.ConfigPath.. "/".. LoadName.Selected))
+			return HS:JSONDecode(readfile(filePath))
 		end)
 	
 		if s then
