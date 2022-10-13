@@ -1,6 +1,6 @@
 --[[
 	rbimgui-2
-	version 1.0
+	version 1.1
 	by Singularity
         https://v3rmillion.net/member.php?action=profile&uid=947830
         Singularity#5490
@@ -1529,6 +1529,7 @@ local library library = {
 
                 function types.button(buttonOptions)
                     local self = { }
+                    self.eventBlock = false
 
                     buttonOptions = settings.new({
                         text = "New Button",
@@ -1541,7 +1542,9 @@ local library library = {
                     button.Text = buttonOptions.text
                     button.Size = UDim2.new(0, button.TextBounds.X + 20, 0, 20)
                     button.MouseButton1Click:Connect(function()
-                        self.event:Fire()
+                        if not self.eventBlock then
+                            self.event:Fire()
+                        end
                     end)
 
                     local ImageLabel = button:FindFirstChild("ImageLabel")
@@ -1583,6 +1586,7 @@ local library library = {
                         animation = options.animation,
                     }).handle(switchOptions)
                     self.on = switchOptions.on
+                    self.eventBlock = false
 
                     local switch = new("Switch")
                     switch.Parent = items
@@ -1615,7 +1619,9 @@ local library library = {
                         if (not not boolean) == self.on then return end
                         self.on = not not boolean
                         resize(check, { ImageTransparency = self.on and 0 or 1 }, switchOptions.animation)
-                        self.event:Fire(self.on)
+                        if not self.eventBlock then
+                            self.event:Fire(self.on)
+                        end
                     end
 
                     function self.setColor(color)
@@ -1652,6 +1658,7 @@ local library library = {
                     }).handle(sliderOptions)
                     self.value = sliderOptions.value
                     self.event = event.new()
+                    self.eventBlock = false
 
                     local function round(x, n)
                         local a = tostring(x * 10^n)
@@ -1708,7 +1715,9 @@ local library library = {
                         end
                         self.value = n
                         if self.value ~= old then
-                            self.event:Fire(self.value)
+                            if not self.eventBlock then
+                                self.event:Fire(self.value)
+                            end
                         end
                         old = self.value
                         value.Text = round(self.value, 2)
@@ -1760,6 +1769,7 @@ local library library = {
                     self.event = event.new()
                     self.isopen = true
                     self.visible = false
+                    self.eventBlock = false
 
                     colorOptions = settings.new({
                         text = "New Color Picker",
@@ -1867,7 +1877,9 @@ local library library = {
                             content:FindFirstChild("SaturationColor").ImageColor3 = Color3.fromHSV(0, 0, v)
                             local v2 = v < 0.5 and 1 or 0
                             ImageLabel:FindFirstChild("ImageLabel").ImageColor3 = Color3.fromHSV(0, 0, v2)
-                            self.event:Fire(color)
+                            if not self.eventBlock then
+                                self.event:Fire(color)
+                            end
                         end
 
                         local Entered1, Entered2 = false, false
@@ -1970,6 +1982,7 @@ local library library = {
                     self.visible = false
                     self.selected = nil
                     self.event = event.new()
+                    self.eventBlock = false
 
                     dropdownOptions = settings.new({
                         text = "New Dropdown",
@@ -2092,7 +2105,9 @@ local library library = {
                             resize(dropdownOption:GetChildren()[1], { ImageColor3 = dropdownOptions.selectioncolor }, 0.1)
                             inner:FindFirstChild("Value").Text = string.format("[ %s ]", name)
                             dropdownWindow:FindFirstChild("Content"):FindFirstChild("Selected").Text = string.format("[ %s ]", name)
-                            self.event:Fire(name)
+                            if not self.eventBlock then
+                                self.event:Fire(name)
+                            end
                         end
 
                         function dropdownObject.Destroy()
