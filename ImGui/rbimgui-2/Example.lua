@@ -1,40 +1,86 @@
 local engine = loadstring(game:HttpGet("https://raw.githubusercontent.com/Singularity5490/rbimgui-2/main/rbimgui-2.lua"))()
-local window = engine.new({ text = "rbimgui demo",color = Color3.new() })
-window.open()
-local tab = window.new({ text = "main" })
-window.new({ text = "examples" })
-window.new({ text = "credits" })
-tab.show()
 
-local dock1 = tab.new("dock")
-local button = tab.new("button")
-button.event:Connect(function()
-    print("button pressed")
+local window1 = engine.new({
+    text = "window 1",
+    size = UDim2.new(300, 200),
+})
+
+window1.open()
+
+local tab1 = window1.new({
+    text = "tab 1",
+})
+
+local label1 = tab1.new("label", {
+    text = "this is a cool tab",
+    color = Color3.new(1, 0, 0),
+})
+
+local button1 = tab1.new("button", {
+    text = "button",
+})
+button1.event:Connect(function()
+    print("button was pressed !")
 end)
 
-dock1.new("slider", {
-    size = 100,
+local switch1 = tab1.new("switch", {
+    text = "swithc!";
+})
+switch1.set(true)
+switch1.event:Connect(function(bool)
+    print("switch set to: ", bool)
+end)
+
+local slider1 = tab1.new("slider", {
+    text = "slider lol",
+    color = Color3.new(0.8, 0.5, 0),
     min = 100,
-    max = 200,
-    value = 120,
-    color = Color3.new(0.8,0,0),
-}).event:Connect(function(x)
+    max = 1000,
+    value = 600.1,
+    rounding = 1,
+})
+slider1.event:Connect(function(x)
     print("slider value: " .. x)
 end)
+slider1.set(420.69)
 
-local folder1 = tab.new("folder", { color = Color3.new(0,0.6,0.6) })
-folder1.open()
-local cp = folder1.new("color", { text = "color1" })
-cp.event:Connect(function(color)
-    print("color: ", color)
+local color1 = tab1.new("color", {
+    color = Color3.new(0, 0, 1),
+    text = "blue balls",
+})
+color1.event:Connect(function(color)
+    print("balls not blue anymore.. now they " .. BrickColor.new(color.r, color.g, color.b).Name:lower())
 end)
 
-local dropdown1 = folder1.new("dropdown", { text = "dropdown 1", color = Color3.new(0,0.6,0) })
+local dropdown1 = tab1.new("dropdown", {
+    text = "some dropdown thing",
+})
+dropdown1.new("object 1")
+dropdown1.new("some other object")
+dropdown1.new("yeaH")
 dropdown1.event:Connect(function(name)
-    print("chosen: " .. name)
+    print("i chose " .. name .. "!")
 end)
-for i = 1,9 do
-    dropdown1.new("option: " .. i)
-end
-folder1.new("dropdown", { rounding = 10 })
-tab.new("label", { text = "hello world!" })
+
+local dock1 = tab1.new("dock")
+
+local button2 = dock1.new("button")
+button2.event:Connect(function()
+    print("button 2 pressed")
+end)
+
+local slider2 = dock1.new("slider", { size = 100 })
+slider2.event:Connect(function(x)
+    print("slider 2 value: ", x)
+end)
+
+local folder1 = tab1.new("folder", {
+    text = "folder.. yeah",
+})
+
+local button3 = folder1.new("button")
+button3.event:Connect(function()
+    print("button THREE.. pressed.")
+end)
+
+folder1.open()
