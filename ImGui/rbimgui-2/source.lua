@@ -1,6 +1,6 @@
 --[[
 	rbimgui-2
-	version 1.1
+	version 1.2
 	by Singularity
         https://v3rmillion.net/member.php?action=profile&uid=947830
         Singularity#5490
@@ -1652,7 +1652,8 @@ local library library = {
                         min = 0,
                         max = 100,
                         value = 0,
-                        color = Color3.fromRGB(32, 59, 97),
+                        color = options.color,
+                        barcolor = bleach(options.color),
                         rounding = options.rounding,
                         animation = options.animation,
                     }).handle(sliderOptions)
@@ -1678,7 +1679,7 @@ local library library = {
                     outer.SliceScale = sliderOptions.rounding / 100
                     inner.SliceScale = sliderOptions.rounding / 100
                     inner.ImageColor3 = sliderOptions.color
-                    _slider.BackgroundColor3 = bleach(sliderOptions.color)
+                    _slider.BackgroundColor3 = sliderOptions.barcolor
 
                     function self.setColor(color)
                         inner.ImageColor3 = color
