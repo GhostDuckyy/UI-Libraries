@@ -1,6 +1,6 @@
 --[[ Pepsi's UI Library
-Better and updated web-based docs are planned.
-Library v0.35 [
+Better and updated web-based docs are planned in distant future.
+Library v0.36 [
     CreateWindow: Function (
         (table | nil) Options [
             (string | nil) Name = "Window Name"
@@ -461,7 +461,7 @@ Library v0.35 [
 ]
 ]]
 local library = {
-	Version = "0.35",
+	Version = "0.36",
 	WorkspaceName = "Pepsi Lib",
 	flags = {},
 	signals = {},
@@ -545,7 +545,7 @@ local function wait_check(...)
 		return false
 	end
 end
-library.subs.Wait, library.subs.wait = wait_check, wait_check
+library.subs.Wait, library.subs.wait, library.Wait = wait_check, wait_check, wait_check
 function library.IsGuiValid()
 	return __runscript
 end
@@ -702,6 +702,13 @@ do
 		local IsDescendantOf = game.IsDescendantOf
 		local RemoveTable = table.remove
 		while wait_check() do
+			while shared.NO_LIB_GC do
+				wait(20)
+				if wait_check() then
+				else
+					return
+				end
+			end
 			wait(10)
 			local Breathe = 30
 			for DataIndex = #colored, 1, -1 do
@@ -745,10 +752,10 @@ do
 							return
 						end
 					end
-					local data = colored[DataIndex]
+					local data = sigs[DataIndex]
 					if data and (typeof(data) == "RBXScriptConnection") and data.Connected then
 					else
-						RemoveTable(colored, DataIndex)
+						RemoveTable(sigs, DataIndex)
 					end
 				end
 			end
@@ -774,9 +781,10 @@ do
 				if tweenit then
 					x, e = pcall(colortwee, data, tweenit)
 				end
-				if not x then
+				if x then
+				else
 					local x, e = pcall(colordarktwee, data)
-					if not x and e then
+					if e and not x then
 						warn(debug.traceback(e))
 					end
 				end
@@ -894,6 +902,7 @@ function SeverAllConnections(t, cache)
 		end
 	end
 end
+library.Subs.SeverAllConnections = SeverAllConnections
 local function hardunload(library)
 	if library.UnloadCallback and (type(library.UnloadCallback) == "function") then
 		local x, e = pcall(library.UnloadCallback)
@@ -1847,8 +1856,8 @@ do
 			Text.Text = TextStr
 			Text.TextColor3 = library.colors.elementText
 			colored[1 + #colored] = {Text, "TextColor3", "elementText"}
-			Text.TextSize = 14
 			Text.TextScaled = true
+			Text.TextSize = 14
 			Text.TextStrokeTransparency = 0.75
 			Text.TextWrap = true
 			Text.TextWrapped = true
@@ -4383,7 +4392,7 @@ function library:CreateWindow(options, ...)
 			sectionFunctions.Slider = sectionFunctions.AddSlider
 			sectionFunctions.Slide = sectionFunctions.AddSlider
 			function sectionFunctions:AddSearchBox(options, ...)
-				options = (options and type(options) == "string" and resolvevararg("SearchBox", options, ...)) or options
+				options = (options and (type(options) == "string") and resolvevararg("SearchBox", options, ...)) or options
 				local dropdownName, listt, val, callback, flagName = assert(options.Name, "Missing Name for new searchbox."), assert(options.List, "Missing List for new searchbox."), options.Value, options.Callback, options.Flag or (function()
 					library.unnamedsearchbox = 1 + (library.unnamedsearchbox or 0)
 					return "SearchBox" .. tostring(library.unnamedsearchbox)
@@ -4404,6 +4413,13 @@ function library:CreateWindow(options, ...)
 				local dropdownEnabled = false
 				local resolvelist = getresolver(listt, options.Filter)
 				local list = resolvelist()
+				if next(list) then
+				else
+					local EmptyVal = options.EmptyValue
+					if EmptyVal ~= nil then
+						table.insert(list, 1, EmptyVal)
+					end
+				end
 				local multiselect = options.MultiSelect or options.Multi or options.Multiple
 				local passed_multiselect = multiselect and type(multiselect)
 				local blankstring = not multiselect and (options.BlankValue or options.NoValueString or options.Nothing)
@@ -4569,6 +4585,47 @@ function library:CreateWindow(options, ...)
 						dropdownHolderFrame.Size = UDim2.fromOffset(206, realDropdownHolderList.AbsoluteContentSize.Y + 4)
 					end
 				end
+				local validate = nil
+				local SetupValidation = nil
+				do
+					local Signals = {}
+					local Setup = nil
+					function SetupValidation()
+						for k, v in next, Signals do
+							v = v and v:Disconnect()
+							Signals[k] = nil
+						end
+						if options.AutoValidate and list and (typeof(list) == "Instance") then
+							local Val = library_flags[flagName] or selectedOption
+							if multiselect then
+								for _, v in next, Val do
+									Setup(v)
+								end
+							else
+								Setup(Val)
+							end
+						end
+					end
+					local gpcs = game.GetPropertyChangedSignal
+					function Setup(v)
+						if typeof(v) == "Instance" then
+							local Signal = nil
+							Signal = gpcs(v, "Parent"):Connect(function()
+								if options.AutoValidate then
+									if list and (v.Parent ~= list) then
+										Signal = (Signal and Signal:Disconnect() and nil) or nil
+										validate()
+									end
+								else
+									for k, v in next, Signals do
+										v = v and v:Disconnect()
+										Signals[k] = nil
+									end
+								end
+							end)
+						end
+					end
+				end
 				local function AddOptions(optionsTable, filter)
 					if options.Sort then
 						local didstuff, dosort = nil, options.Sort
@@ -4675,10 +4732,20 @@ function library:CreateWindow(options, ...)
 										dropdownSelection.Text = stringed
 										if selectedOption ~= v then
 											local last_v = library_flags[flagName]
-											selectedObjects[1].BackgroundColor3 = library.colors.topGradient
-											selectedObjects[1].ImageColor3 = library.colors.bottomGradient
-											selectedObjects[2].Text = selectedObjects[2].Name
-											selectedObjects[2].TextColor3 = library.colors.otherElementText
+											do
+												local First = selectedObjects[1]
+												if First then
+													selectedObjects[1].BackgroundColor3 = library.colors.topGradient
+													selectedObjects[1].ImageColor3 = library.colors.bottomGradient
+												end
+											end
+											do
+												local Second = selectedObjects[2]
+												if Second then
+													selectedObjects[2].Text = selectedObjects[2].Name
+													selectedObjects[2].TextColor3 = library.colors.otherElementText
+												end
+											end
 											selectedOption = v
 											selectedObjects[1] = newOption
 											selectedObjects[2] = optionButton
@@ -4750,6 +4817,13 @@ function library:CreateWindow(options, ...)
 					if submenuOpen == dropdown or submenuOpen == nil then
 						if dropdownEnabled then
 							list = resolvelist()
+							if next(list) then
+							else
+								local EmptyVal = options.EmptyValue
+								if EmptyVal ~= nil then
+									table.insert(list, 1, EmptyVal)
+								end
+							end
 							AddOptions(list, f)
 							submenuOpen = dropdown
 							dropdownToggle.Rotation = 270
@@ -4857,6 +4931,9 @@ function library:CreateWindow(options, ...)
 					if proceed and callback then
 						task.spawn(callback, selectedOption, cloned)
 					end
+					if options.AutoValidate then
+						SetupValidation()
+					end
 					return selectedOption
 				end) or function(t, str)
 					if nil == str and t then
@@ -4875,6 +4952,9 @@ function library:CreateWindow(options, ...)
 					if callback and (last_v ~= str or options.AllowDuplicateCalls) then
 						task.spawn(callback, str, last_v)
 					end
+					if options.AutoValidate then
+						SetupValidation()
+					end
 					return str
 				end
 				if val ~= nil then
@@ -4883,6 +4963,9 @@ function library:CreateWindow(options, ...)
 					library_flags[flagName] = selectedOption
 					if options.Location then
 						options.Location[options.LocationFlag or flagName] = selectedOption
+					end
+					if options.AutoValidate then
+						SetupValidation()
 					end
 				end
 				library.signals[1 + #library.signals] = dropdownToggle.MouseButton1Click:Connect(function()
@@ -4921,7 +5004,7 @@ function library:CreateWindow(options, ...)
 					dropdownHeadline.Text = (dropdownName and tostring(dropdownName)) or "???"
 					return sstr
 				end
-				local function validate(fallbackValue)
+				function validate(fallbackValue)
 					if list and table.find(list, library_flags[flagName]) then
 						update()
 						return true
@@ -5025,6 +5108,13 @@ function library:CreateWindow(options, ...)
 					end
 					resolvelist = getresolver(listt or options.List, options.Filter, options.Method)
 					list = resolvelist()
+					if next(list) then
+					else
+						local EmptyVal = options.EmptyValue
+						if EmptyVal ~= nil then
+							table.insert(list, 1, EmptyVal)
+						end
+					end
 					if updateValues then
 						validate()
 					end
@@ -5900,6 +5990,13 @@ function library:CreateWindow(options, ...)
 				local blankstring = not multiselect and (options.BlankValue or options.NoValueString or options.Nothing)
 				local resolvelist = getresolver(listt, options.Filter, options.Method)
 				local list = resolvelist()
+				if next(list) then
+				else
+					local EmptyVal = options.EmptyValue
+					if EmptyVal ~= nil then
+						table.insert(list, 1, EmptyVal)
+					end
+				end
 				local selectedOption = list[1]
 				local passed_multiselect = multiselect and type(multiselect)
 				if blankstring and val == nil then
@@ -6038,6 +6135,47 @@ function library:CreateWindow(options, ...)
 						dropdownHolderFrame.Size = UDim2.fromOffset(206, realDropdownHolderList.AbsoluteContentSize.Y + 4)
 					end
 				end
+				local validate = nil
+				local SetupValidation = nil
+				do
+					local Signals = {}
+					local Setup = nil
+					function SetupValidation()
+						for k, v in next, Signals do
+							v = v and v:Disconnect()
+							Signals[k] = nil
+						end
+						if options.AutoValidate and list and (typeof(list) == "Instance") then
+							local Val = library_flags[flagName] or selectedOption
+							if multiselect then
+								for _, v in next, Val do
+									Setup(v)
+								end
+							else
+								Setup(Val)
+							end
+						end
+					end
+					local gpcs = game.GetPropertyChangedSignal
+					function Setup(v)
+						if typeof(v) == "Instance" then
+							local Signal = nil
+							Signal = gpcs(v, "Parent"):Connect(function()
+								if options.AutoValidate then
+									if list and (v.Parent ~= list) then
+										Signal = (Signal and Signal:Disconnect() and nil) or nil
+										validate()
+									end
+								else
+									for k, v in next, Signals do
+										v = v and v:Disconnect()
+										Signals[k] = nil
+									end
+								end
+							end)
+						end
+					end
+				end
 				local restorezindex = {}
 				local Set = (multiselect and function(t, dat)
 					if nil == dat and t ~= nil then
@@ -6083,6 +6221,9 @@ function library:CreateWindow(options, ...)
 					if proceed and callback then
 						task.spawn(callback, selectedOption, cloned)
 					end
+					if options.AutoValidate then
+						SetupValidation()
+					end
 					return selectedOption
 				end) or function(t, str)
 					if nil == str and t ~= nil then
@@ -6101,6 +6242,9 @@ function library:CreateWindow(options, ...)
 					if callback and (last_v ~= str or options.AllowDuplicateCalls) then
 						task.spawn(callback, str, last_v)
 					end
+					if options.AutoValidate then
+						SetupValidation()
+					end
 					return str
 				end
 				if val ~= nil then
@@ -6109,6 +6253,9 @@ function library:CreateWindow(options, ...)
 					library_flags[flagName] = selectedOption
 					if options.Location then
 						options.Location[options.LocationFlag or flagName] = selectedOption
+					end
+					if options.AutoValidate then
+						SetupValidation()
 					end
 				end
 				local function AddOptions(optionsTable)
@@ -6121,14 +6268,14 @@ function library:CreateWindow(options, ...)
 							elseif h then
 								warn("Error sorting list:", h, debug.traceback(""))
 							end
-						elseif dosort ~= 1 and dosort ~= true then
+						elseif (dosort ~= 1) and (dosort ~= true) then
 							warn("Potential mistake for passed Sort argument:", dosort, debug.traceback(""))
 						end
 						if not didstuff then
 							table.sort(optionsTable, library.defaultSort)
 						end
 					end
-					if blankstring and (optionsTable[1] ~= blankstring or table.find(optionsTable, blankstring, 2)) then
+					if blankstring and ((optionsTable[1] ~= blankstring) or table.find(optionsTable, blankstring, 2)) then
 						local exists = table.find(optionsTable, blankstring)
 						if exists then
 							for _ = 1, 35 do
@@ -6288,6 +6435,13 @@ function library:CreateWindow(options, ...)
 				local precisionscrolling, update = nil
 				local function display(dropdownEnabled)
 					list = resolvelist()
+					if next(list) then
+					else
+						local EmptyVal = options.EmptyValue
+						if EmptyVal ~= nil then
+							table.insert(list, 1, EmptyVal)
+						end
+					end
 					if dropdownEnabled then
 						AddOptions(list)
 						submenuOpen = dropdown
@@ -6398,7 +6552,7 @@ function library:CreateWindow(options, ...)
 					dropdownHeadline.Text = (dropdownName and tostring(dropdownName)) or "???"
 					return sstr
 				end
-				local function validate(fallbackValue)
+				function validate(fallbackValue)
 					if list and table.find(list, library_flags[flagName]) then
 						update()
 						return true
@@ -6490,6 +6644,13 @@ function library:CreateWindow(options, ...)
 					end
 					resolvelist = getresolver(listt or options.List, options.Filter, options.Method)
 					list = resolvelist()
+					if next(list) then
+					else
+						local EmptyVal = options.EmptyValue
+						if EmptyVal ~= nil then
+							table.insert(list, 1, EmptyVal)
+						end
+					end
 					if updateValues then
 						validate()
 					end
@@ -7121,6 +7282,16 @@ function library:CreateWindow(options, ...)
 				end
 			end
 		end
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return tabFunctions
 	end
 	windowFunctions.AddTab = windowFunctions.CreateTab
@@ -7484,7 +7655,7 @@ function library:CreateWindow(options, ...)
 						if good and jcontent then
 							for cflag, val in next, jcontent do
 								local data = elements[cflag]
-								if data and data.Type ~= "Persistence" then
+								if data and (data.Type ~= "Persistence") then
 									if data.Set then
 										data:Set(val)
 									elseif data.RawSet then
