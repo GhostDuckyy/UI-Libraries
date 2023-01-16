@@ -4,7 +4,7 @@ Made by **`RoadToGlory#9879`** | [V3rmillion Profile](https://v3rmillion.net/mem
 ### Loadstring
 [V3rmllion Thread](https://v3rmillion.net/showthread.php?pid=8379542#pid8379542) / [Documentation](https://rd2glory.com/AtlasDocs.html) / [Discord](https://discord.gg/T9DE6eHGCm)
 ```lua
-local Atlas = loadstring(game:HttpGet("https://rd2glory.com/Atlas.lua"))()
+local Atlas = loadstring(game:HttpGet("https://siegehub.net/Atlas.lua"))()
 ```
 
 ### Preview
