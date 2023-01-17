@@ -1,10 +1,37 @@
 # ReadMe
 Made by **[Jxereas](https://v3rmillion.net/member.php?action=profile&uid=604105) / `Jxereas#3766`**
 
+[Documentation](https://github.com/GhostDuckyy/Ui-Librarys/blob/main/Cerberus/Docs.lua)
+
 ### Loadstring
 ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Jxereas/UI-Libraries/main/cerberus.lua"))()
 ```
+
+## Features
+> Windows (Can change constraining to screen and draggable, adjustable width and height, changeable visibility toggle key: default right control)
+
+> Tabs (Can change image)
+
+> Sections
+
+> Titles
+
+>Labels (Change text after creating)
+
+> Toggles (Set toggle states, Changeable Toggle Image)
+
+> Buttons
+
+> Dropdowns (Add dropdowns and searchbars inside previous dropdowns)
+
+> Searchbars (Add searchbars and dropdowns inside previous searchbars)
+
+> Keybinds
+
+> TextBoxs
+
+> ColorWheels
 
 ## Preview
 Video: https://gyazo.com/5e1ab6aa01cb7f5415f1c4695a5ac90d
