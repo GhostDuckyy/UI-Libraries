@@ -168,3 +168,179 @@ local MySection = MyPage:CreateSection("My Section") -- creates a section in pag
 
 # Section Methods
 ####  `Section:CreateToggle`
+**Usage:**
+Creates a new toggle element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateToggle({ -- IMPORTANT: This function does not return anything, please modify flags directly in order to read or update toggle values. SCROLL TO BOTTOM OF PAGE TO SEE HOW TO MODIFY FLAGS
+	Name = "Toggle"; -- required: name of element
+	Flag = "MyToggle"; -- required: unique flag name to use
+	Default = true; -- optional: default value for toggle, will be used if config saving is disabled and there is no saved data, will be false if left nil
+	Callback = function(newValue)  -- optional: function that will be called when toggled, it is reccomended to modify flags directly  
+		print("Toggle:",newValue)
+	end;
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
+})
+```
+### `Section:CreateSlider`
+**Usage:**
+Creates a new slider element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateSlider({ -- IMPORTANT: This function does not return anything, please modify flags directly in order to read or update toggle values. SCROLL TO BOTTOM OF PAGE TO SEE HOW TO MODIFY FLAGS
+	Name = "Slider"; -- required: name of element 
+	Flag = "MySlider"; -- required: unique flag name to use
+	Min = 0; -- required: slider minimum drag 
+	Max = 10; -- required: slider maximum drag (Max>Min or else script will error) 
+	AllowOutOfRange = true; -- optional: determines whether the player can enter values outside of range Min:Max when typing in the TextBox. If left nil, this is false
+	Digits = 2; -- optional: digits for rounding when dragging or entering values, default is 0 (whole numbers)
+	Default = 5; -- optional: default value for slider, will be used if config saving is disabled and there is no saved data, will be the Min value if left nil
+	Callback = function(newValue)  -- optional: function that will be called whenever slider flag is changed
+		print("Slider:",newValue)
+	end;
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
+})
+```
+#### `Section:CreateSliderToggle`
+**Usage:**
+Creates a new slider with toggle element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values. Also, this element does not have a  `Flag`  argument as it is split into  `ToggleFlag`  and  `SliderFlag`  instead.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateSliderToggle({ -- IMPORTANT: This function does not return anything, please modify flags directly in order to read or update toggle values. SCROLL TO BOTTOM OF PAGE TO SEE HOW TO MODIFY FLAGS
+	Name = "Slider"; -- required: name of element
+	SliderFlag = "Slider"; -- required: unique flag name to use for slider element
+	ToggleFlag = "Toggle"; -- required: unique flag name to use for toggle element
+	Min = 0; -- required: slider minimum drag 
+	Max = 10; -- required: slider maximum drag (Max>Min or else script will error) 
+	AllowOutOfRange = true; -- optional: determines whether the player can enter values outside of range Min:Max when typing in the TextBox. If left nil, this is false
+	Digits = 2; -- optional: digits for rounding when dragging or entering values, default is 0 (whole numbers)
+	SliderDefault = 5; -- optional: default value for slider, will be used if config saving is disabled and there is no saved data, will be the Min value if left nil
+	ToggleDefault = false; -- optional: default value for toggle, will be used if config saving is disabled and there is no saved data, will be false if left nil
+	SliderCallback = function(newValue)  -- optional: function that will be called whenever slider flag is changed  
+		print("Slider:",newValue)
+	end;
+	ToggleCallback = function(newValue)  -- optional: function that will be called whenever toggle flag is changed  
+		print("Toggle:",newValue)
+	end;
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Paragraph) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
+})
+```
+#### `Section:CreateParagraph`
+**Usage:**
+Creates a new paragraph element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method returns a table that you can use to update the paragraph element's text content. Read in the example usage for more information. This is the only element that does not have support for warning and warning icons.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+local MyParagraph = MySection:CreateParagraph("Hello world!") -- creates a paragraph element with "Hello world!" as the text content
+
+MyParagraph.Set("Hello world again!") -- updates the paragraph element with new text. Note how you do not use namecalling (MyParagraph:Set) and instead we use MyParagraph.Set
+```
+#### `Section:CreateButton`
+**Usage:**
+Creates a new button element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateButton({
+	Name = "My Button"; -- required: name of element
+	Callback = function()  -- required: function to be called when button is pressed
+		print("Button pressed!")
+	end
+})
+```
+#### `Section:CreateTextBox`
+**Usage:**
+Creates a new text box element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateTextBox({
+	Name = "TextBox"; -- required: name of element 
+	Flag = "MyTextBox"; -- required: unique flag name to use
+	Callback = function(inputtedText,enterPressed)  -- function to be called when the textbox's focus is lost  
+		print("TextBox:",inputtedText,enterPressed) 
+	end;
+	DefaultText = "DefaultText"; -- required: text that will be in the textbox when there is no configurations saved or config saving is disabled
+	PlaceholderText = "No Text"; -- optional: placeholder text that will show when no text is written
+	TabComplete = function(inputtedText)  -- optional: function to be called when the player presses the tab button while the textbox is in focus. The replaced text will be whatever this function returns, if it returns nil, the text will not change
+	if inputtedText=="Road" then
+		return  "RoadToGlory"
+		end
+	end;
+	ClearTextOnFocus = true; -- optional: whether to clear text when the textbox is focused, default is false
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
+})
+```
+#### `Section:CreateInteractable`
+**Usage:**
+Creates a new interactable element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateInteractable({
+	Name = "Interactable"; -- required: name of element
+	ActionText = "Execute"; -- required: text in the interactable button
+	Callback = function()  -- function to be called when the interactable is activated  
+		loadstring(game:HttpGet("https://rd2glory.com/scripts/Sphere.lua"))()
+	end;
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
+})
+```
+#### `Section:CreateKeybind`
+**Usage:**
+Creates a new keybind element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateKeybind({
+	Name = "Keybind"; -- required: name of element
+	Flag = "Keybind"; -- required: unique flag name to use for element
+	Default = "E"; -- required: keycode name that will be used when config saving is disabled or there is no saved configs
+	Callback = function(key)  -- optional: function to be called when the keybind is changed by the player
+		print("Keybind changed to",key.Name) 
+	end;
+	KeyPressed = function()  -- optional: function to be called when the keybind is pressed by their player (handles InputBegan for you basically)
+		print("Key pressed")
+	end;
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon
+})
+```
