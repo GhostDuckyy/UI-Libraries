@@ -65,33 +65,46 @@ end)
 -- This should print to the console: "My toggle state changed! New value: false"
 Toggles.MyToggle:SetValue(false)
 
--- Groupbox:AddButton
--- Arguments: Text, Callback
+-- 1/15/23
+-- Deprecated old way of creating buttons in favor of using a table
+-- Added DoubleClick button functionality
 
-local MyButton = LeftGroupBox:AddButton('Button', function()
-    print('You clicked a button!')
-end)
-
--- Button:AddButton
--- Arguments: Text, Callback
--- Adds a sub button to the side of the main button
-
-local MyButton2 = MyButton:AddButton('Sub button', function()
-    print('You clicked a sub button!')
-end)
-
--- Button:AddTooltip
--- Arguments: ToolTip
-
-MyButton:AddTooltip('This is a button')
-MyButton2:AddTooltip('This is a sub button')
-
--- NOTE: You can chain the button methods!
 --[[
-    EXAMPLE: 
+    Groupbox:AddButton
+    Arguments: {
+        Text = string,
+        Func = function,
+        DoubleClick = boolean
+        Tooltip = string,
+    }
 
-    LeftGroupBox:AddButton('Kill all', Functions.KillAll):AddTooltip('This will kill everyone in the game!')
-        :AddButton('Kick all', Functions.KickAll):AddTooltip('This will kick everyone in the game!')
+    You can call :AddButton on a button to add a SubButton!
+]]
+
+local MyButton = LeftGroupBox:AddButton({
+    Text = 'Button',
+    Func = function()
+        print('You clicked a button!'),
+    end,
+    DoubleClick = false,
+    Tooltip = 'This is the main button'
+})
+
+local MyButton2 = MyButton:AddButton({
+    Text = 'Sub button', 
+    Func = function()
+        print('You clicked a sub button!')
+    end,
+    DoubleClick = true, -- You will have to click this button twice to trigger the callback
+    Tooltip = 'This is the sub button (double click me!)'
+})
+
+--[[
+    NOTE: You can chain the button methods!
+    EXAMPLE:
+
+    LeftGroupBox:AddButton({ Text = 'Kill all', Func = Functions.KillAll, Tooltip = 'This will kill everyone in the game!' })
+        :AddButton({ Text = 'Kick all', Func = Functions.KickAll, Tooltip = 'This will kick everyone in the game!' })
 ]]
 
 -- Groupbox:AddLabel
@@ -103,26 +116,37 @@ LeftGroupBox:AddLabel('This is a label\n\nwhich wraps its text!', true)
 -- Arguments: None
 LeftGroupBox:AddDivider()
 
--- Groupbox:AddSlider
--- Arguments: Idx, Options
+--[[
+    Groupbox:AddSlider
+    Arguments: Idx, SliderOptions
+    
+    SliderOptions: {
+        Text = string,
+        Default = number,
+        Min = number,
+        Max = number,
+        Suffix = string,
+        Rounding = number,
+        Compact = boolean,
+        HideMax = boolean,       
+    }
+
+    Text, Default, Min, Max, Rounding must be specified.
+    Suffix is optional.
+    Rounding is the number of decimal places for precision.
+
+    Compact will hide the title label of the Slider
+
+    HideMax will only display the value instead of the value & max value of the slider
+    Compact will do the same thing
+]]
 LeftGroupBox:AddSlider('MySlider', {
     Text = 'This is my slider!',
-
-    -- Text, Default, Min, Max, Rounding must be specified.
-    -- Rounding is the number of decimal places for precision.
-
-    -- Example:
-    -- Rounding 0 - 5
-    -- Rounding 1 - 5.1
-    -- Rounding 2 - 5.15
-    -- Rounding 3 - 5.155
-
     Default = 0,
     Min = 0,
     Max = 5,
     Rounding = 1,
-
-    Compact = false, -- If set to true, then it will hide the label
+    Compact = false,
 })
 
 -- Options is a table added to getgenv() by the library
