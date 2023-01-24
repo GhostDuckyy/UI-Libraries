@@ -344,3 +344,113 @@ MySection:CreateKeybind({
 	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon
 })
 ```
+
+#### `Section:CreateDropdown`
+**Usage:**
+
+Creates a new dropdown element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method returns a table with a :Update method that can be used to update dropdown elements. This method is coded in a way that will not lag the game if put in a RenderStepped event.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+local MyDropdown = MySection:CreateDropdown({ 
+	Name = "Dropdown"; -- required: name of element
+	Callback = function(item)  -- required: function to be called an item in the dropdown is activated
+		print("Dropdown button pressed:",item) 
+	end;
+	Options = {"Apple","Orange","Banana"}; -- required: dropdown options
+	ItemSelecting = true; -- optional: whether to control item selecting behavior in dropdowns (see showcase video), is false by default 
+	DefaultItemSelected = "Deez"; -- optional: default item selected, will not run the callback and does not need to be from options table. This will be ignored if ItemSelecting is not true.
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
+})
+game:GetService("RunService").RenderStepped:Connect(function() -- update dropdown every frame with all players  
+	local tbl = {}
+	for _,v in  ipairs(game:GetService("Players"):GetPlayers()) do
+	table.insert(tbl,v.Name)
+	end
+	MyDropdown:Update(tbl) -- uses namecalling, ":" instead of "."
+end)
+```
+
+#### `Section:CreateColorPicker`
+**Usage:**
+
+Creates a new color picker element in given section using arguments passed in a table as a parameter.  
+**Note:**  This method does not return anything, please modify flags directly in order to read or update the element's values.
+
+**Example Usage:**
+```lua
+local MySection = MyPage:CreateSection("My Section")
+MySection:CreateColorPicker({
+	Name = "Color Picker"; -- required: name of element
+	Flag = "ColorPicker"; -- required: unique flag name to use for element
+	Default = Color3.fromRGB(0,255,0); -- required: Color3 that will be used when config saving is disabled or there is no saved configs 
+	Callback = function(newColor)  -- optional: function to be called when the color is changed by the player
+		print("Color changed to",tostring(newColor))
+	end;
+	-- Scroll to the bottom of the page to read more about the following two:
+	Warning = "This has a warning"; -- optional: this argument is used in all elements (except for Body) and will indicate text that will appear when the player hovers over the warning icon
+	WarningIcon = 12345; -- optional: ImageAssetId for warning icon, will only be used if Warning is not nil, default is yellow warning icon.
+})
+```
+
+# Other Arguments
+#### `SavingDisabled`
+This argument can be used on elements that save configurations, and when set to true will exclude the element from loading/saving configs.
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateToggle({
+	Name = "Toggle";
+	Flag = "MyToggle";
+	Default = true;
+	Callback = function(newValue)
+		print("Toggle:",newValue) 
+	end;
+	SavingDisabled = true; -- this will prevent loading/saving of configurations for this element
+})
+```
+#### `CallbackOnCreation`
+This can be used on elements with a callback function and when set to true, will call the callback with whatever data was loaded or the default data when created.  
+This is useful if you have an autofarm or a system where you want the callback to be called on creation in case of any saved data which would cause a mismatch.
+```lua
+local MySection = MyPage:CreateSection("My Section")
+
+MySection:CreateToggle({
+	Name = "Toggle";
+	Flag = "MyToggle";
+	Default = true;
+	Callback = function(newValue)  
+		print("Toggle:",newValue) 
+	end;
+	CallbackOnCreation = true; -- this call the callback function immediatly with whatever saved data there is, and if there is no saved data it will use the default value
+})
+```
+# Extra Info
+**Warnings**
+
+A warning is a term used to describe an icon that comes after the title text of an element. This warning's appearance can be changed to your liking and can show whatever hover text you would like. You can use a warning to show an experimental feature, a beta feature, or an imcomplete feature to your users.  
+There are three icons that are uploaded and provided to you for your use (you are welcome to upload more and use your own asset ids). You may index these by using  `Atlas.Icons`  
+Here are the icons included:
+```lua
+Library.Icons = {
+	["Warning"] = 11110093949;
+	["Info"] = 11109991278;
+	["Error"] = 11109992284;
+}
+```
+Here is an example of what the default warning `Library.Icons.Warning` looks like in-game:
+![a](https://docs.siegehub.net/DocsAssets/images/warning.png)
+Here is an example of what hovering over these look like:
+![b](https://docs.siegehub.net/DocsAssets/images/warningHover.png)
+**Please remember that this is a very early release, so there are likely to be bugs, typos, and other problems regarding Atlas and this documentation. If you have feedback or want to report a bug/typo, join our discord server in the topbar of this page and let us know. Thanks!**
+
+**Security**
+Atlas UI Library is a UI library only and has little to no security measures. We expect you to take care of this on your own as everyone does this their own way. If you don't want to do it yourself, we reccomend services such as  [Luauth](https://discord.gg/XNQPBybcCQ)  or  [Luaguard](https://discord.gg/xb8K9uj9xj)  that will handle it all for you.
+
+### Version 1.0  (8 April, 2020)
+Initial Release
