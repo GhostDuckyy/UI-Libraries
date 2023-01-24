@@ -3,7 +3,7 @@ DropLib is a simple, efficient and beautiful way to quickly build a GUI for your
 It features: All the UI elements you would ever want, super-easy to use yet versatile API, jawdropping sexy defaults, nice and clean animations, In-Game gui updates!!, and much more!
 If you have any questions, just dm me on discord: cheb#5214
 
-![Screenshot](screenshot.png "Screenshot")
+![Screenshot](https://gitlab.com/0x45.xyz/droplib/-/raw/master/screenshot.png)
 
 ## How to get started
 1. Read the [Examplecode](#examplecode)
