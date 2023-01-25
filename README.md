@@ -3,4 +3,4 @@ u can Find a **Good** ui library here.
 
 >:)
 
-If documentation url invaild then check `Docs` or `Example` file
+If documentation url invalid then check `Docs` or `Example` file
