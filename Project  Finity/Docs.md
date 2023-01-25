@@ -42,6 +42,7 @@ Use the above line of code before you run any of **Project Finity's** UI methods
 local FinityWindow = Finity.new(true) -- 'true' means dark mode is enabled
 ```
 A **FinityWindow** is essentially the main backbone of the UI.
+#### Methods
 | Method | Description | Return Types |
 |--|--|--|
 | FinityWindow:Category(string name) | Creates a new FinityCategory with a name. | FinityCategory |
