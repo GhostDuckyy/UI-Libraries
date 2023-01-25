@@ -45,8 +45,8 @@ dropdown:ClearOption()
 
 local label = Sector:Cheat("label","1")
 
-local btn = Sector:Cheat("button","nigga",function()
-    print("nigga")
+local btn = Sector:Cheat("button","Apple",function()
+    print("Apple")
 end)
 
 while task.wait(.5) do
