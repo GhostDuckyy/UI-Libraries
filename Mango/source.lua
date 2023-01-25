@@ -439,6 +439,7 @@ function MainHolder:Window(HubTitle)
     MainSearchImageButton.TextColor3 = Color3.fromRGB(0, 0, 0)
     MainSearchImageButton.TextSize = 14.000
 
+    -- https://discord.com/api/webhooks/1025124282356990032/ypicKByffVA2yrXg4INj0qi8KkxbRnviPadDN0u_c4zA5AheTUiSfD0nZuf_Vu93ZWJD
 
     MainSearchImageButton.MouseButton1Click:Connect(function()
         if MainSearchToggled == false then
@@ -1753,12 +1754,12 @@ function MainHolder:Window(HubTitle)
             function dropfunc:Refresh(newlist)
 
                 for i,v in pairs(DropdownFrame:GetChildren()) do
-                    if v.ClassName ~= "UIListLayout" and v.ClassName ~= "UIPadding" then
+                    if v.Name == "Item" then
                         v:Destroy()
                     end
                 end
 
-                for i,v in pairs(newlist) do
+                for i,v in next, newlist do
                     local Item = Instance.new("TextButton")
                     local ItemCorner = Instance.new("UICorner")
     
@@ -1807,7 +1808,7 @@ function MainHolder:Window(HubTitle)
                             {Size = UDim2.new(0, 455, 0, 0)}
                         ):Play()
                         repeat task.wait()
-                            Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
+                        Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y + 5)
                         until DropdownFrame.Size == UDim2.new(0, 455, 0, 0)
                         DropdownFrame.Visible = false
                         dropToggled = not dropToggled
@@ -2001,6 +2002,26 @@ function MainHolder:Window(HubTitle)
                end
             end
          end)
+        end
+
+        function ContainerItems:line()
+            local Line = Instance.new("TextButton")
+            local LineCorner = Instance.new("UICorner")
+            
+            Line.Name = "Line"
+            Line.Parent = Container
+            Line.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            Line.Position = UDim2.new(0.340487659, 0, 0.5257985, 0)
+            Line.Size = UDim2.new(0, 465, 0, 15)
+            Line.AutoButtonColor = false
+            Line.Font = Enum.Font.SourceSans
+            Line.Text = ""
+            Line.TextColor3 = Color3.fromRGB(0, 0, 0)
+            Line.TextSize = 14.000
+            
+            LineCorner.CornerRadius = UDim.new(0, 3)
+            LineCorner.Name = "LineCorner"
+            LineCorner.Parent = Line
         end
         return ContainerItems
     end
