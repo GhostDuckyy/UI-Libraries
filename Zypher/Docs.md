@@ -166,6 +166,11 @@ local category = main:CreateCategory("Category")
 local section = category:CreateSection("Section")
 
 section:Create(
+    "Textlabel",
+    "Hi, text here!"
+)
+
+section:Create(
     "Button",
     "Button",
     function()
