@@ -28,7 +28,7 @@ Here is a list of interactables you can add to your section.
 ```
 Button, Toggle, Slider, Textlabels, Textbox, Dropdown, Keybind, Colorpicker
 ```
-```lua
+```html
 section:Create(
     <string, interactableType>,
     <string, interactableName>,
