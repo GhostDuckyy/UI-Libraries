@@ -136,6 +136,28 @@ section:Create(
     }
 )
 ```
+
+#### SetDropDownList & GetDropDownList
+```lua
+local dropdown = section:Create(
+    "DropDown",
+    "DropDown", 
+    function(current)
+        print("Selected to:", current)
+    end,
+    {
+        options = {"Apple","Banana","Coconut",},
+         -- Optional
+        default = "Apple",
+        search = true
+    }
+)
+
+dropdown:SetDropDownList({"Dog", "Cat", "Monkey"})
+
+dropdown:GetDropDownList() -- Return table of options
+```
+
 ### ColorPicker
 ```lua
 Section:Create(
