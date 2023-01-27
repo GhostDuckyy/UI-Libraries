@@ -193,6 +193,11 @@ Section:Create(
     }
 )
 ```
+### Applying Custom Themes / Colors
+```lua
+
+```
+
 ## Final Example
 Down here you will have a full example including the ui library. You can use this to get started, but we recommend you to read the documentation.
 ```lua
