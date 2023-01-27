@@ -182,7 +182,7 @@ dropdown:GetDropDownList() -- Return table of options
 
 ### ColorPicker
 ```lua
-Section:Create(
+section:Create(
     "ColorPicker",
     "ColorPicker",
     function(color)
