@@ -4,6 +4,28 @@
 ```lua
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/teppyboy/RbxScripts/master/Misc/UI_Libraries/Zypher/Library.lua"))()
 ```
+### Theme
+```html
+library:SetThemeColor(<string>, <Color3>)
+```
+##### Default Theme
+```lua
+local Themes = {
+	Background = Color3.fromRGB(46, 46, 54),
+	GrayContrast = Color3.fromRGB(39, 38, 46),
+	DarkContrast = Color3.fromRGB(29, 29, 35),
+	TextColor = Color3.fromRGB(255,255,255),
+	SectionContrast = Color3.fromRGB(39,38,46),
+	DropDownListContrast = Color3.fromRGB(34, 34, 41),
+	CharcoalContrast = Color3.fromRGB(21,21,26),
+}
+```
+
+##### Example
+```lua
+library:SetThemeColor("Background", Color3.new(1, 1, 1))
+```
+
 
 ### Window
 ```lua
