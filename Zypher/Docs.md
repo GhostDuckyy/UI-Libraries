@@ -4,11 +4,11 @@
 ```lua
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/teppyboy/RbxScripts/master/Misc/UI_Libraries/Zypher/Library.lua"))()
 ```
-### Theme
+### Themes
 ```html
 library:SetThemeColor(<string>, <Color3>)
 ```
-##### Default Theme
+##### Default
 ```lua
 local Themes = {
 	Background = Color3.fromRGB(46, 46, 54),
