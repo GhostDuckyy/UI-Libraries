@@ -195,7 +195,29 @@ section:Create(
 ```
 ### Applying Custom Themes / Colors
 ```lua
+local Themes = {
+	Background = Color3.fromRGB(46, 46, 54),
+	GrayContrast = Color3.fromRGB(39, 38, 46),
+	DarkContrast = Color3.fromRGB(29, 29, 35),
+	TextColor = Color3.fromRGB(255,255,255),
+	SectionContrast = Color3.fromRGB(39,38,46),
+	DropDownListContrast = Color3.fromRGB(34, 34, 41),
+	CharcoalContrast = Color3.fromRGB(21,21,26),
+}
 
+for ColorsName, Value in next, Themes do
+    section:Create(
+        "ColorPicker",
+        ColorsName,
+        function(colors)
+            Value = colors
+            library:SetThemeColor(ColorsName, colors)
+        end,
+        {
+            default = Value
+        }
+    )
+end
 ```
 
 ## Final Example
