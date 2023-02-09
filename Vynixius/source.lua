@@ -87,6 +87,12 @@ local ScreenGui = SelfModules.UI.Create("ScreenGui", {
 	ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
 })
 
+function Library:Destroy()
+	if ScreenGui.Parent then
+		ScreenGui:Destroy()
+	end
+end
+
 function Library:Notify(options, callback)
 	if Library.Notif.IsBusy == true then
 		Library.Notif.Queue[#Library.Notif.Queue + 1] = { options, callback }
@@ -295,8 +301,10 @@ function Library:AddWindow(options)
 
 	if options.theme ~= nil then
 		for i, v in next, options.theme do
-			if typeof(Library.Theme[i]) == "Color3" then
-				Library.Theme[i] = v
+			for i2, _ in next, Library.Theme do
+				if string.lower(i) == string.lower(i2) and typeof(v) == "Color3" then
+					Library.Theme[i2] = v
+				end
 			end
 		end
 	end
@@ -446,101 +454,103 @@ function Library:AddWindow(options)
 	-- Functions
 
 	local function saveConfig(filePath)
-		local config = { Flags = {}, Binds = {}, Sliders = {}, Pickers = {} }
+		pcall(function()
+			local config = { Flags = {}, Binds = {}, Sliders = {}, Pickers = {} }
 	
-		for _, tab in next, Window.Tabs do
-			for flag, value in next, tab.Flags do
-				config.Flags[flag] = value
-			end
-	
-			for _, section in next, tab.Sections do
-				for _, item in next, section.List do
-					local flag = item.Flag or item.Name
-	
-					if item.Type == "Bind" then
-						config.Binds[flag] = item.Bind.Name
-	
-					elseif item.Type == "Slider" then
-						config.Sliders[flag] = item.Value
-	
-					elseif item.Type == "Picker" then
-						config.Pickers[flag] = { Color = item.Color, Rainbow = item.Rainbow }
-	
-					elseif item.Type == "SubSection" then
-						for _, item2 in next, item.List do
-							local flag2 = item2.Flag or item2.Name
-	
-							if item2.Type == "Bind" then
-								config.Binds[flag2] = item2.Bind.Name
-	
-							elseif item2.Type == "Slider" then
-								config.Sliders[flag2] = item2.Value
-	
-							elseif item2.Type == "Picker" then
-								config.Pickers[flag2] = { Color = item2.Color, Rainbow = item2.Rainbow }
-							end
-						end
-					end
-				end
-			end
-		end
-	
-		writefile(filePath, HS:JSONEncode(config))
-	end
-	
-	local function loadConfig(filePath)
-		local s, config = pcall(function()
-			return HS:JSONDecode(readfile(filePath))
-		end)
-	
-		if s then
 			for _, tab in next, Window.Tabs do
+				for flag, value in next, tab.Flags do
+					config.Flags[flag] = value
+				end
+		
 				for _, section in next, tab.Sections do
 					for _, item in next, section.List do
 						local flag = item.Flag or item.Name
-	
-						if config.Flags[flag] ~= nil then
-							item[item.Type == "Toggle" and "Set" or "Toggle"](item, config.Flags[flag])
-						end
-	
+		
 						if item.Type == "Bind" then
-							item:Set(Enum.KeyCode[config.Binds[flag]])
-	
+							config.Binds[flag] = item.Bind.Name
+		
 						elseif item.Type == "Slider" then
-							item:Set(config.Sliders[flag])
-	
+							config.Sliders[flag] = item.Value
+		
 						elseif item.Type == "Picker" then
-							local picker = config.Pickers[flag]
-	
-							item:Set(picker.Color.R, picker.Color.G, picker.Color.B)
-							item:ToggleRainbow(picker.Rainbow)
-	
+							config.Pickers[flag] = { Color = item.Color, Rainbow = item.Rainbow }
+		
 						elseif item.Type == "SubSection" then
 							for _, item2 in next, item.List do
 								local flag2 = item2.Flag or item2.Name
-	
-								if config.Flags[flag2] ~= nil then
-									item2[item2.Type == "Toggle" and "Set" or "Toggle"](item2, config.Flags[flag2])
-								end
-	
+		
 								if item2.Type == "Bind" then
-									item2:Set(Enum.KeyCode[config.Binds[flag2]])
-	
+									config.Binds[flag2] = item2.Bind.Name
+		
 								elseif item2.Type == "Slider" then
-									item2:Set(config.Sliders[flag2])
-	
+									config.Sliders[flag2] = item2.Value
+		
 								elseif item2.Type == "Picker" then
-									local picker = config.Pickers[flag2]
-	
-									item2:Set(picker.Color.R, picker.Color.G, picker.Color.B)
-									item2:ToggleRainbow(picker.Rainbow)
+									config.Pickers[flag2] = { Color = item2.Color, Rainbow = item2.Rainbow }
 								end
 							end
 						end
 					end
 				end
 			end
-		end
+		
+			writefile(filePath, HS:JSONEncode(config))
+		end)
+	end
+	
+	local function loadConfig(filePath)
+		pcall(function()
+			local config = HS:JSONDecode(readfile(filePath))
+		
+			if config then
+				for _, tab in next, Window.Tabs do
+					for _, section in next, tab.Sections do
+						for _, item in next, section.List do
+							local flag = item.Flag or item.Name
+		
+							if config.Flags[flag] ~= nil then
+								item[item.Type == "Toggle" and "Set" or "Toggle"](item, config.Flags[flag])
+							end
+		
+							if item.Type == "Bind" then
+								item:Set(Enum.KeyCode[config.Binds[flag]])
+		
+							elseif item.Type == "Slider" then
+								item:Set(config.Sliders[flag])
+		
+							elseif item.Type == "Picker" then
+								local picker = config.Pickers[flag]
+		
+								item:Set(picker.Color.R, picker.Color.G, picker.Color.B)
+								item:ToggleRainbow(picker.Rainbow)
+		
+							elseif item.Type == "SubSection" then
+								for _, item2 in next, item.List do
+									local flag2 = item2.Flag or item2.Name
+		
+									if config.Flags[flag2] ~= nil then
+										item2[item2.Type == "Toggle" and "Set" or "Toggle"](item2, config.Flags[flag2])
+									end
+		
+									if item2.Type == "Bind" then
+										item2:Set(Enum.KeyCode[config.Binds[flag2]])
+		
+									elseif item2.Type == "Slider" then
+										item2:Set(config.Sliders[flag2])
+		
+									elseif item2.Type == "Picker" then
+										local picker = config.Pickers[flag2]
+		
+										item2:Set(picker.Color.R, picker.Color.G, picker.Color.B)
+										item2:ToggleRainbow(picker.Rainbow)
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end)
 	end
 
 	function Window:Toggle(bool)
@@ -3162,7 +3172,7 @@ function Library:AddWindow(options)
 						Flag = options.flag or name,
 						Callback = callback,
 					}
-
+					
 					Slider.Frame = SelfModules.UI.Create("Frame", {
 						Name = name,
 						BackgroundColor3 = SelfModules.UI.Color.Add(Library.Theme.SectionColor, Color3.fromRGB(20, 20, 20)),
@@ -4084,8 +4094,6 @@ function Library:AddWindow(options)
 				if SaveName.Box.Text ~= "" then
 					local fileName = SaveName.Box.Text.. (string.sub(SaveName.Box.Text, #SaveName.Box.Text - 4, #SaveName.Box.Text) ~= ".json" and ".json" or "")
 					local filePath = Library.Settings.ConfigPath.. "/".. fileName
-
-					warn(filePath)
 
 					if isfile(filePath) then
 						Library:Notify({ text = "You already have a config named '".. fileName.. "', do you wish to overwrite it?" }, function(bool)
