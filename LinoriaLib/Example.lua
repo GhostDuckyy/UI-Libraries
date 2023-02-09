@@ -333,6 +333,9 @@ Library:OnUnload(function()
     Library.Unloaded = true
 end)
 
+-- Notif
+Library:Notify("Hello World!", 5) -- Text, Time
+
 -- UI Settings
 local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
 
