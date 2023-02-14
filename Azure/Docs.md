@@ -9,7 +9,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/prezt
 Before the loadstring add this.
 ```lua
 _G.CustomTheme = {
-	Tab_Color = Color3.fromRGB(255, 255, 255),
+    Tab_Color = Color3.fromRGB(255, 255, 255),
     Tab_Text_Color = Color3.fromRGB(0, 0, 0),
     Description_Color = Color3.fromRGB(255, 255, 255),
     Description_Text_Color = Color3.fromRGB(0, 0, 0),
@@ -23,7 +23,7 @@ _G.CustomTheme = {
     Slider_Bar_Color = Color3.fromRGB(243, 243, 243),
     Slider_Inner_Color = Color3.fromRGB(94, 255, 180),
     Slider_Text_Color = Color3.fromRGB(0, 0, 0),
-	Slider_Border_Color = Color3.fromRGB(255, 255, 255),
+    Slider_Border_Color = Color3.fromRGB(255, 255, 255),
     Dropdown_Text_Color = Color3.fromRGB(0, 0, 0),
     Dropdown_Option_BorderSize = 1,
     Dropdown_Option_BorderColor = Color3.fromRGB(235, 235, 235),
