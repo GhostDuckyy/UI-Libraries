@@ -76,10 +76,10 @@ end)
 You can also add a dropdown. A dropdown is a list of options you can choose.
 ```lua
 AimbotTab:CreateDropDown("Aimbot Part",  {"Head",  "Torso"},  function(arg)  --the (arg) is the option you choose
-if arg ==  "Head"  then
-	print("HEahshoot")
+	if arg ==  "Head"  then
+		print("HEahshoot")
 	elseif arg ==  "Torso"  then
-	print("trrrrso")
+		print("trrrrso")
 	end
 end)
 ```
