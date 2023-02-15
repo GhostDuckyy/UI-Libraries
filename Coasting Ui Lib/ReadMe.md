@@ -1,9 +1,7 @@
-# V3rmillon: <a href="https://v3rmillion.net/showthread.php?pid=7590437#pid7590437" target="_blank">Here</a> 
-# Source: <a href="https://pastebin.com/raw/3gQQtaKX" target="_blank">Here</a> 
+# ReadMe
+Made by [coasts](https://v3rmillion.net/member.php?action=profile&uid=1393756) / [V3rmillion Thread](https://v3rmillion.net/showthread.php?pid=7590437#pid7590437)
 
-# Documentation: <a href="https://pastebin.com/raw/7HkS6SBJ" target="_blank">Here</a> 
-
-# Example:
+## Example:
 ```lua
 local CoastingLibrary = loadstring(game:HttpGet("https://pastebin.com/raw/3gQQtaKX"))()
 
