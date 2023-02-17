@@ -6,7 +6,7 @@ local TweenService = game:GetService("TweenService")
 local input = game:GetService("UserInputService")
 
 for i,v in next, game.CoreGui:GetChildren() do
-    if v:IsA("ScreenGui") and v.Name == "NeverloseByCryptweb" then
+    if v:IsA("ScreenGui") and v.Name == "Neverlose" then
         v:Destroy() 
     end
 end
