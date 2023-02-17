@@ -94,6 +94,12 @@ local function clickEffect(options)
     end)
 end
 
+function Library:Toggle(value)
+    if game:GetServer("CoreGui"):FindFirstChild("Neverlose") == nil then return end
+    enabled = (type(value) == "boolean" and value) or game:GetServer("CoreGui"):FindFirstChild("Neverlose").Enabled
+    game:GetServer("CoreGui"):FindFirstChild("Neverlose").Enabled = not enabled
+end
+
 function Library:Window(options)
     options.text = options.text or "NEVERLOSE"
 
@@ -116,7 +122,7 @@ function Library:Window(options)
     local tabContainer = Instance.new("Frame")
 
     SG.Parent = game.CoreGui
-    SG.Name = "NeverloseByCryptweb"
+    SG.Name = "Neverlose"
 
     Body.Name = "Body"
     Body.Parent = SG
