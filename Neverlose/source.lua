@@ -1237,3 +1237,5 @@ function Library:Window(options)
 
     return tabsections
 end
+
+return Library
