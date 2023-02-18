@@ -3,7 +3,7 @@ Made by [coasts](https://v3rmillion.net/member.php?action=profile&uid=1393756) /
 
 ## Example:
 ```lua
-local CoastingLibrary = loadstring(game:HttpGet("https://pastebin.com/raw/3gQQtaKX"))()
+local CoastingLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/Coasting%20Ui%20Lib/source.lua"))()
 
 local AimbotTab = CoastingLibrary:CreateTab("Aimbot")
 local MainSection = AimbotTab:CreateSection("Main")
