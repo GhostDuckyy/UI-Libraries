@@ -2,7 +2,7 @@
 Made by [Singularity](https://v3rmillion.net/member.php?action=profile&uid=947830) / **`Singularity#5490`**
 
 ## Preview
-![video](https://i.gyazo.com/a9e4288bbaf1c9b96f464f04a755783f.mp4)
+https://i.gyazo.com/a9e4288bbaf1c9b96f464f04a755783f.mp4
 
 ![video](https://gyazo.com/bd45a28edd95adcc1ed6693c734d51dd.mp4)
 
