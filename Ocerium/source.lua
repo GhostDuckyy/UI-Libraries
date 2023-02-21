@@ -3,10 +3,10 @@ local InputService = game:GetService("UserInputService")
 
 local Library = {
 	["Theme"] = {
-		    ["Font"] = "RobotoMono",
-        ["AccentColor"] = Color3.fromRGB(0,175,255),
-        ["FontColor"] = Color3.fromRGB(255,255,255),
-        ["HideKey"] = "LeftAlt"
+	        ["Font"] = "RobotoMono",
+		["AccentColor"] = Color3.fromRGB(0,175,255),
+		["FontColor"] = Color3.fromRGB(255,255,255),
+		["HideKey"] = "LeftAlt"
 	}
 }
 
