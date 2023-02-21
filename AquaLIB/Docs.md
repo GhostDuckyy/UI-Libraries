@@ -1,3 +1,4 @@
+## Docs
 Step 1: Import the library
 ```lua
 local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/AquaLib.lua'))()
@@ -32,56 +33,6 @@ end)
 local textbox = section1.createTextBox("Test TextBox", "Test")
 section1.createText("Test Text")
 
-tab1.createButton("Test Button", function()
-	print("Button Pressed!")
-end)
-tab1.createButton("Create Notification", function() 
-	window.notification("Test Notification", "Hello World")
-end)
-tab1.createToggle("Test Toggle", false, function(value)
-	print(value)
-end)
-tab1.createText("Test Text")
-tab1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
-	print(value)
-end)
-tab1.createSlider("Test Slider", {defualt = 50, max = 100, min = 1}, function(value)
-	print(value)
-end)
-local textbox = tab1.createTextBox("Test TextBox", "Test")
-
-wait(5)
-print(textbox.getText())
-textbox.clearText()
-```
-
-Full Example:
-```lua
-local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/AquaLib.lua'))()
-
-local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
-local tab1 = window.createTab("This Is A Tab") -- window.createTab(name)
-local section1 = tab1.createSection("Test Section", false)
-
-section1.createText("Hello World")
-section1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
-	print(value)
-end)
-tab1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
-	print(value)
-end)
-section1.createButton("Test Button", function()
-	print("Button Pressed!")
-end)
-section1.createToggle("Test Toggle", false, function(value)
-	print(value)
-end)
-section1.createSlider("Test Slider", {defualt = 50, max = 100, min = 1}, function(value)
-	print(value)
-end)
-
-local textbox = section1.createTextBox("Test TextBox", "Test")
-section1.createText("Test Text")
 tab1.createButton("Test Button", function()
 	print("Button Pressed!")
 end)
@@ -223,3 +174,55 @@ text.clearText, Usage:
 ```lua
 input.clearText() -- input.clearText
 ```
+
+## Misc
+Full Example:
+```lua
+local lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/TheoTheEpic/AquaLib/main/AquaLib.lua'))()
+
+local window = lib.createWindow("This Is A Window", "TestWindow", true) -- lib.createWindow(title, name, draggable)
+local tab1 = window.createTab("This Is A Tab") -- window.createTab(name)
+local section1 = tab1.createSection("Test Section", false)
+
+section1.createText("Hello World")
+section1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
+	print(value)
+end)
+tab1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
+	print(value)
+end)
+section1.createButton("Test Button", function()
+	print("Button Pressed!")
+end)
+section1.createToggle("Test Toggle", false, function(value)
+	print(value)
+end)
+section1.createSlider("Test Slider", {defualt = 50, max = 100, min = 1}, function(value)
+	print(value)
+end)
+
+local textbox = section1.createTextBox("Test TextBox", "Test")
+section1.createText("Test Text")
+tab1.createButton("Test Button", function()
+	print("Button Pressed!")
+end)
+tab1.createButton("Create Notification", function() 
+	window.notification("Test Notification", "Hello World")
+end)
+tab1.createToggle("Test Toggle", false, function(value)
+	print(value)
+end)
+tab1.createText("Test Text")
+tab1.createDropdown("Test Dropdown", {"Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8", "Option 9", "Option 10"}, "Option 7", function(value)
+	print(value)
+end)
+tab1.createSlider("Test Slider", {defualt = 50, max = 100, min = 1}, function(value)
+	print(value)
+end)
+local textbox = tab1.createTextBox("Test TextBox", "Test")
+
+wait(5)
+print(textbox.getText())
+textbox.clearText()
+```
+
