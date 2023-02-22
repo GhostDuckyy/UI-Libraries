@@ -1641,6 +1641,7 @@ function library:Init()
 end
 
 function library:Close()
+	if typeof(self.base) ~= "Instance" end
 	self.open = not self.open
 	self.cursor.Visible = self.open
 	if self.activePopup then
