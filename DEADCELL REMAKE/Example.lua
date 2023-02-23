@@ -19,7 +19,7 @@ local theme = {
 }
 
 do
-    local window = library:new_window({size = Vector2.new(600,400)})
+    local window = library:new_window({size = Vector2.new(600,450)})
     local page = window:new_page({name = "Example Page"})
 	local accent = page:new_section({
 		name = "theme",
