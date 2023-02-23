@@ -2,7 +2,7 @@
 Made by **`Portal#4849`** / [V3rmillion Thread](https://v3rmillion.net/showthread.php?tid=1201591)
 
 ### Notes
-[**1**] maybe only work with Synapse X
+[**1**] only work with Synapse X
 
 [**2**] if url is invalid then replace url in `misc/image` of file
 ## Preview
