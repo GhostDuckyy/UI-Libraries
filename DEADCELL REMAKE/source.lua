@@ -4,7 +4,7 @@ local settings = {
     default_accent = Color3.fromRGB(61, 100, 227); -- also stupid shit
 };
 
-local drawing = loadstring(game:HttpGet("https://gist.githubusercontent.com/notportal/043d5c6024b9307e6fa39e090df4f93e/raw/457097fcf289cff78073046e924ac19c928e9d66/extension.lua"))();
+local drawing = loadstring(game:HttpGet("https://github.com/GhostDuckyy/UI-Libraries/blob/main/DEADCELL%20REMAKE/misc/extension.lua?raw=true"))();
 local tween = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/utility/main/Tween.lua"))()
 
 -- // UI LIBRARY
