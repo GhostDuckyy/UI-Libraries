@@ -6,6 +6,7 @@ local settings = {
 
 local drawing = loadstring(game:HttpGet("https://github.com/GhostDuckyy/UI-Libraries/blob/main/DEADCELL%20REMAKE/misc/extension.lua?raw=true"))();
 local tween = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/utility/main/Tween.lua"))()
+local bxor = loadstring(game:HttpGet('https://github.com/GhostDuckyy/GhostDuckyy/blob/main/Tool/bxor.lua?raw=true'))()
 
 -- // UI LIBRARY
 if not isfolder(settings.folder_name) then
@@ -21,7 +22,10 @@ local images = {
     ['arrow_up'] = "https://i.imgur.com/SL9cbQp.png";
 }
 for i,v in next, images do
-    images[i] = game:HttpGet(v)
+    if not isfile(settings.folder_name..'/assets/'..i..'.ln') then
+        writefile(settings.folder_name..'/assets/'..i..'.ln', bxor:encrypt(game:HttpGet(v), "4XGudgFuutoHUM2Ctwsq4YrQ"))
+    end
+    images[i] = bxor:decrypt(readfile(settings.folder_name..'/assets/'..i..'.ln'), "4XGudgFuutoHUM2Ctwsq4YrQ")
 end
 
 local services = setmetatable({}, {
