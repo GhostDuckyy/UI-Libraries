@@ -1,4 +1,6 @@
 # ReadMe
+[V3rmillion Thread](https://v3rmillion.net/showthread.php?tid=1203135)
+
 UI made by [vozoid](https://v3rmillion.net/member.php?action=profile&uid=485232) / **`vozoid#1346`**
 
 ## Preview
