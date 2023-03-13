@@ -1,8 +1,10 @@
---[[    
-    // -- Documentation -- \\
+--[[
+    // -- Notes -- \\
 
     After you create the menu, set library.menu to that menu you created by doing library.menu = menu
     After creating all your tabs and options, refresh the menu so they update by doing library.menu:refresh()
+
+    // -- Documentation -- \\
 
     option:set_enabled(enabled <boolean>)
     option:set_text(text <string>)
