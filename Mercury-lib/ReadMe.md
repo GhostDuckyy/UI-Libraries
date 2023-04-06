@@ -2,7 +2,7 @@
 
 # Mercury
 
-Mercury is a free and open sourced Roblox UI library.
+Mercury is a free and open sourced Roblox UI library / [V3rmillion Thrad](https://v3rmillion.net/showthread.php?tid=1154995) / [Github](https://github.com/deeeity/mercury-lib).
 
 - https://discord.gg/jaunk8nhN5
 - https://discord.com/users/480805591221010456
