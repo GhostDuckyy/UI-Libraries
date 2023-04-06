@@ -12,9 +12,9 @@ local assets = {
   transparent_pattern = syn.crypt.base64.decode("iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD1SURBVDhP7ZJZioZADIT7/grihts5XA7gLVwu4pLhy0xEflSct3mYQFGh6arO0q4oCnlCkiQyTZMQ67oq7/t+8LZtmv8b/TWjcRxVtCzLITbGnPy1EaI7I9hx8Q5pmkoQBDLPs5b/FI7X7jAMg3Lf99K2rXRdp7DcuK5rcT+Gj9E0jfi+r1VGUSRxHCsDzjzPE0d/V6B3ZkLOq7RZVdUxuzzPFWVZqqFjaFcwQwIjLpvYYKZqpDcvwgwJZkE7iLIsO9gqCsPwdxWdWzpX9ao1cio6G535mJEJPsGw7bNREdtBZGJjFkDbr9bPP2HFvPyJ7/V78gX+B0MUDN65vQAAAABJRU5ErkJggg==")
 }
 for id, asset in next,assets do
-  local path = "ars_cache/asset_" .. tostring(id) .. ".png"
-  if not isfolder("ars_cache") then
-    makefolder("ars_cache")
+  local path = "ligma_cache/asset_" .. tostring(id) .. ".png"
+  if not isfolder("ligma_cache") then
+    makefolder("ligma_cache")
   end
   if not isfile(path) then
     writefile(path, asset)
@@ -28,7 +28,7 @@ do
   local _base_0 = {
     new_window = function(self, title, position, size)
       if title == nil then
-        title = "ars.red"
+        title = "hotwheels.vip"
       end
       if position == nil then
         position = UDim2.new(0.5, -250, 0.5, -300)
@@ -65,7 +65,9 @@ do
       menu_group:new_button({
         text = "Unload",
         callback = function()
-          return getgenv().window:destroy()
+          getgenv().window:destroy()
+          getgenv().library = nil
+          getgenv().window = nil
         end
       })
       config_group:new_textbox("config_name", {
@@ -76,14 +78,21 @@ do
       config_group:new_button({
         text = "Save",
         callback = function()
-          local config_name = "ars/" .. tostring(getgenv().window.flags["config_name"]) .. ".json"
-          if (not isfolder("ars")) then
-            makefolder("ars")
+          local config_name = "ligma/" .. tostring(getgenv().window.flags["config_name"]) .. ".json"
+          if (not isfolder("ligma")) then
+            makefolder("ligma")
           end
           local fixed_config = { }
           for key, value in next,getgenv().window.flags do
             if (not getgenv().window.ignore[key]) then
-              fixed_config[key] = value
+              local fixed_value = value
+              if (typeof(value) == "table" and value.color) then
+                fixed_value = {
+                  color = value.color:ToHex(),
+                  transparency = value.transparency
+                }
+              end
+              fixed_config[key] = fixed_value
             end
           end
           return writefile(config_name, game:GetService("HttpService"):JSONEncode(fixed_config))
@@ -92,14 +101,21 @@ do
       return config_group:new_button({
         text = "Load",
         callback = function()
-          local config_name = "ars/" .. tostring(getgenv().window.flags["config_name"]) .. ".json"
-          if (not isfolder("ars")) then
-            makefolder("ars")
+          local config_name = "ligma/" .. tostring(getgenv().window.flags["config_name"]) .. ".json"
+          if (not isfolder("ligma")) then
+            makefolder("ligma")
           end
           if (isfile(config_name)) then
             for flag, value in next,game:GetService("HttpService"):JSONDecode(readfile(config_name)) do
               if (getgenv().window.options[flag] and not getgenv().window.ignore[flag]) then
-                getgenv().window.options[flag]:set_value(value)
+                local fixed_value = value
+                if (typeof(value) == "table" and value.color) then
+                  fixed_value = {
+                    color = Color3.fromHex(value.color),
+                    transparency = value.transparency
+                  }
+                end
+                getgenv().window.options[flag]:set_value(fixed_value)
               end
             end
           end
@@ -176,7 +192,7 @@ do
           tab.Position = UDim2.new(0, column_center, 0, 0)
           tab.Size = UDim2.new(0, distance_per_column, 0, 18)
           if idx == self.active_tab then
-            tab.TextColor3 = Color3.fromRGB(255, 0, 0)
+            tab.TextColor3 = Color3.fromRGB(129, 99, 251)
           end
         end
         local tab
@@ -315,9 +331,9 @@ do
                             Size = UDim2.new(0, 14, 0, 14),
                             Position = UDim2.new(0, 0, 0, 0),
                             Image = getsynasset(assets.checkmark),
-                            ImageColor3 = Color3.fromRGB(255, 0, 0),
+                            ImageColor3 = Color3.fromRGB(129, 99, 251),
                             ScaleType = Enum.ScaleType.Fit,
-                            Visible = false,
+                            Visible = self.window.flags[flag],
                             Parent = button,
                             ZIndex = 15
                           })
@@ -399,7 +415,7 @@ do
                                 Font = Enum.Font.Gotham,
                                 TextSize = 12,
                                 TextXAlignment = Enum.TextXAlignment.Left,
-                                TextColor3 = is_active and Color3.fromRGB(255, 0, 0) or Color3.fromRGB(255, 255, 255),
+                                TextColor3 = is_active and Color3.fromRGB(129, 99, 251) or Color3.fromRGB(255, 255, 255),
                                 Visible = true,
                                 ZIndex = 10000
                               })
@@ -419,7 +435,7 @@ do
                                 for _, object in next,self.window.drop_container:GetChildren() do
                                   if object:IsA("TextButton") then
                                     is_active = options.multi and table.find(self.window.flags[flag], object.Text) or self.window.flags[flag] == object.Text
-                                    object.TextColor3 = is_active and Color3.fromRGB(255, 0, 0) or Color3.fromRGB(255, 255, 255)
+                                    object.TextColor3 = is_active and Color3.fromRGB(129, 99, 251) or Color3.fromRGB(255, 255, 255)
                                     if not options.multi then
                                       object.Visible = false
                                     end
@@ -457,7 +473,7 @@ do
                             for _, object in next,self.window.drop_container:GetChildren() do
                               if object:IsA("TextButton") then
                                 local is_active = options.multi and table.find(self.window.flags[self.flag], object.Text) or self.window.flags[self.flag] == object.Text
-                                object.TextColor3 = is_active and Color3.fromRGB(255, 0, 0) or Color3.fromRGB(255, 255, 255)
+                                object.TextColor3 = is_active and Color3.fromRGB(129, 99, 251) or Color3.fromRGB(255, 255, 255)
                                 if not options.multi then
                                   object.Visible = false
                                 end
@@ -590,7 +606,7 @@ do
                                   Font = Enum.Font.Gotham,
                                   TextSize = 12,
                                   TextXAlignment = Enum.TextXAlignment.Left,
-                                  TextColor3 = is_active and Color3.fromRGB(255, 0, 0) or Color3.fromRGB(255, 255, 255),
+                                  TextColor3 = is_active and Color3.fromRGB(129, 99, 251) or Color3.fromRGB(255, 255, 255),
                                   Visible = true,
                                   ZIndex = 10000
                                 })
@@ -610,7 +626,7 @@ do
                                   for _, object in next,self.window.drop_container:GetChildren() do
                                     if object:IsA("TextButton") then
                                       is_active = options.multi and table.find(self.window.flags[flag], object.Text) or self.window.flags[flag] == object.Text
-                                      object.TextColor3 = is_active and Color3.fromRGB(255, 0, 0) or Color3.fromRGB(255, 255, 255)
+                                      object.TextColor3 = is_active and Color3.fromRGB(129, 99, 251) or Color3.fromRGB(255, 255, 255)
                                       if not options.multi then
                                         object.Visible = false
                                       end
@@ -782,11 +798,9 @@ do
                         set_value = function(self, value)
                           self.window.flags[flag] = math.clamp(value, options.min, options.max)
                           self.entry.Text = tostring(self.window.flags[flag]) .. tostring(options.suffix or "")
-                          local distance = self.button.AbsoluteSize.X
-                          local origin = distance * (math.abs(options.min) / (options.max + math.abs(options.min)))
-                          value = distance * (self.window.flags[flag] / (options.max + math.abs(options.min)))
-                          self.slider_value.Size = UDim2.new(0, value, 1, 0)
-                          self.slider_value.Position = UDim2.new(0, origin, 0, 0)
+                          value = self.window.flags[flag] / (options.max - options.min)
+                          self.slider_value.Size = UDim2.new(value, 0, 1, 0)
+                          self.slider_value.Position = UDim2.new(0, 0, 0, 0)
                           if (self.window.flags[flag] ~= self.last_value) then
                             self.last_value = self.window.flags[flag]
                             return options.callback(self.window.flags[flag])
@@ -804,6 +818,7 @@ do
                           self.window = self.parent.parent.parent
                           self.group_objects = { }
                           self.window.flags[flag] = options.default or 0
+                          options.callback = options.callback or function() end
                           self.group_objects[#self.group_objects + 1] = self.window:add_object("Frame", {
                             Name = generate_guid(),
                             BackgroundColor3 = Color3.fromRGB(20, 20, 20),
@@ -872,16 +887,14 @@ do
                             AutoButtonColor = false,
                             ZIndex = 15
                           })
-                          local distance = self.button.AbsoluteSize.X
-                          local origin = distance * (math.abs(options.min) / (options.max + math.abs(options.min)))
-                          local value = distance * (self.window.flags[flag] / (options.max + math.abs(options.min)))
+                          local value = (self.window.flags[flag] / (options.max - options.min)) - (options.min / (options.max - options.min))
                           self.slider_value = self.window:add_object("Frame", {
                             Name = generate_guid(),
-                            BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+                            BackgroundColor3 = Color3.fromRGB(129, 99, 251),
                             BackgroundTransparency = 0,
                             BorderSizePixel = 0,
-                            Size = UDim2.new(0, value, 1, 0),
-                            Position = UDim2.new(0, origin, 0, 0),
+                            Size = UDim2.new(value, 0, 1, 0),
+                            Position = UDim2.new(0, 0, 0, 0),
                             Parent = self.button,
                             ZIndex = 16
                           })
@@ -890,13 +903,13 @@ do
                           local mouse_down
                           mouse_down = function(x)
                             is_mouse_down = true
-                            distance = self.button.AbsoluteSize.X
+                            local distance = self.button.AbsoluteSize.X
+                            local decimals = options.decimals > 0 and 10 * options.decimals or 1
                             local mouse_distance = math.clamp((x - self.button.AbsolutePosition.X) / distance, 0, 1)
-                            value = math.round(((options.max - options.min) * mouse_distance + options.min) * math.max((10 * (options.decimals or 1)), 1)) / math.max((10 * (options.decimals or 1)), 1)
-                            local slider_origin = distance * (value / (options.max + math.abs(options.min)))
+                            value = math.round(((options.max - options.min) * mouse_distance + options.min) * decimals) / decimals
                             self.window.flags[flag] = value
                             self.entry.Text = tostring(self.window.flags[flag]) .. tostring(options.suffix or "")
-                            self.slider_value.Size = UDim2.new(0, slider_origin, 1, 0)
+                            self.slider_value.Size = UDim2.new((value / (options.max - options.min)) - (options.min / (options.max - options.min)), 0, 1, 0)
                           end
                           local mouse_move
                           mouse_move = function(x)
@@ -927,11 +940,9 @@ do
                               if value then
                                 self.window.flags[flag] = math.clamp(value, options.min, options.max)
                                 self.entry.Text = tostring(self.window.flags[flag]) .. tostring(options.suffix or "")
-                                distance = self.button.AbsoluteSize.X
-                                origin = distance * (math.abs(options.min) / (options.max + math.abs(options.min)))
-                                value = distance * (self.window.flags[flag] / (options.max + math.abs(options.min)))
-                                self.slider_value.Size = UDim2.new(0, value, 1, 0)
-                                self.slider_value.Position = UDim2.new(0, origin, 0, 0)
+                                value = self.window.flags[flag] / (options.max - options.min)
+                                self.slider_value.Size = UDim2.new(value, 0, 1, 0)
+                                self.slider_value.Position = UDim2.new(0, 0, 0, 0)
                                 if (self.window.flags[flag] ~= self.last_value) then
                                   self.last_value = self.window.flags[flag]
                                   return options.callback(self.window.flags[flag])
@@ -1208,7 +1219,15 @@ do
                             if value.keycode then
                               self.window.flags[self.flag].keycode = value.keycode
                               self.window.flags[self.flag].mode = value.mode
-                              keybind.Text = value == "MouseButton1" and "[MB1]" or "MouseButton2" and "[MB2]" or "[" .. tostring(value) .. "]"
+                              if value.keycode == "MouseButton1" then
+                                keybind.Text = "[MB1]"
+                              else
+                                if value.keycode == "MouseButton2" then
+                                  keybind.Text = "[MB2]"
+                                else
+                                  keybind.Text = "[" .. tostring(value.keycode) .. "]"
+                                end
+                              end
                             else
                               self.window.flags[self.flag].keycode = nil
                               self.window.flags[self.flag].mode = "Hold"
@@ -1257,10 +1276,11 @@ do
                             input_began = function(input)
                               if input.UserInputType == Enum.UserInputType.Keyboard then
                                 if self.awaiting_input then
-                                  if input.KeyCode == Enum.KeyCode.Backspace then
+                                  if input.KeyCode == Enum.KeyCode.Backspace or input.KeyCode == Enum.KeyCode.Escape then
                                     self.awaiting_input = false
                                     keybind.Text = "[None]"
                                     self.window.flags[flag].keycode = nil
+                                    self.window.flags[flag].state = false
                                     return 
                                   end
                                   keybind.Text = "[" .. tostring(input.KeyCode.Name) .. "]"
@@ -1318,7 +1338,7 @@ do
                             local input_ended
                             input_ended = function(input)
                               if input.UserInputType == Enum.UserInputType.Keyboard then
-                                if input.KeyCode == self.window.flags[flag].keycode and self.window.flags[flag].mode == "Hold" then
+                                if input.KeyCode.Name == self.window.flags[flag].keycode and self.window.flags[flag].mode == "Hold" then
                                   self.window.flags[flag].state = false
                                   options.callback(self.window.flags[flag].state)
                                 end
@@ -1409,6 +1429,7 @@ do
                               local hue, saturation, value = self.window.flags[flag].color:ToHSV()
                               self.window.colorpicker_objects[1].Position = UDim2.new(0, self.container.AbsolutePosition.X + self.container.AbsoluteSize.X + 15, 0, self.container.AbsolutePosition.Y)
                               self.window.colorpicker.BackgroundColor3 = Color3.fromHSV(hue, 1, 1)
+                              self.window.opacity_slider.BackgroundColor3 = self.window.flags[flag].color
                               self.window.location.Position = UDim2.new(0, math.clamp(saturation * self.window.colorpicker.AbsoluteSize.X, 0, 170), 0, math.clamp((-(value) + 1) * self.window.colorpicker.AbsoluteSize.Y, 0, 170))
                               self.window.hue_slider_location.Position = UDim2.new(0, 0, 0, math.clamp(hue * self.window.hue_slider.AbsoluteSize.Y, 0, 175))
                               self.window.opacity_slider_location.Position = UDim2.new(0, 0, 0, math.clamp(self.window.flags[flag].transparency * self.window.opacity_slider.AbsoluteSize.Y, 0, 175))
@@ -1494,7 +1515,7 @@ do
                 CanvasSize = UDim2.new(0, 0, 1, 0),
                 ScrollBarThickness = 3,
                 ScrollBarImageTransparency = 0,
-                ScrollBarImageColor3 = Color3.fromRGB(255, 0, 0),
+                ScrollBarImageColor3 = Color3.fromRGB(129, 99, 251),
                 TopImage = "rbxassetid://0",
                 VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar,
                 ZIndex = 10
@@ -1513,7 +1534,7 @@ do
                 CanvasSize = UDim2.new(0, 0, 1, 0),
                 ScrollBarThickness = 3,
                 ScrollBarImageTransparency = 0,
-                ScrollBarImageColor3 = Color3.fromRGB(255, 0, 0),
+                ScrollBarImageColor3 = Color3.fromRGB(129, 99, 251),
                 TopImage = "rbxassetid://0",
                 VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar,
                 ZIndex = 10
@@ -1598,7 +1619,7 @@ do
         for idx, tab in next,self.tab_objects do
           tab.TextColor3 = Color3.fromRGB(255, 255, 255)
           if idx == self.active_tab then
-            tab.TextColor3 = Color3.fromRGB(255, 0, 0)
+            tab.TextColor3 = Color3.fromRGB(129, 99, 251)
           end
         end
         for idx, group in next,self.tab_groups do
@@ -1626,13 +1647,16 @@ do
         for _, connection in next,self.connections do
           connection:Disconnect()
         end
+        if getgenv().window_destroyed then
+          return getgenv().window_destroyed()
+        end
       end
     }
     _base_1.__index = _base_1
     _class_1 = setmetatable({
       __init = function(self, title, position, size)
         if title == nil then
-          title = "ars.red"
+          title = "ligma library"
         end
         if position == nil then
           position = UDim2.new(0.5, -250, 0.5, -300)
@@ -1708,7 +1732,7 @@ do
         self.colorpicker = self:add_object("TextButton", {
           Name = generate_guid(),
           BackgroundTransparency = 0,
-          BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+          BackgroundColor3 = Color3.fromRGB(129, 99, 251),
           BorderSizePixel = 0,
           Size = UDim2.new(0, 180, 0, 180),
           Position = UDim2.new(0, 1, 0, 1),
@@ -1765,7 +1789,7 @@ do
           ZIndex = 9999,
           CanvasSize = UDim2.new(0, 0, 0, 100),
           ScrollBarThickness = 3,
-          ScrollBarImageColor3 = Color3.fromRGB(255, 0, 0),
+          ScrollBarImageColor3 = Color3.fromRGB(129, 99, 251),
           ScrollBarImageTransparency = 0,
           AutomaticCanvasSize = Enum.AutomaticSize.Y,
           TopImage = "rbxassetid://0",
@@ -1841,7 +1865,7 @@ do
         self.opacity_slider = self:add_object("TextButton", {
           Name = generate_guid(),
           BackgroundTransparency = 0,
-          BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+          BackgroundColor3 = Color3.fromRGB(129, 99, 251),
           BorderSizePixel = 0,
           BorderColor3 = Color3.fromRGB(30, 30, 30),
           Size = UDim2.new(0, 15, 0.994, 0),
@@ -2117,7 +2141,7 @@ do
         }
         self.title_objects[#self.title_objects + 1] = self:add_object("UIGradient", {
           Name = generate_guid(),
-          Color = ColorSequence.new(Color3.fromRGB(255, 0, 0)),
+          Color = ColorSequence.new(Color3.fromRGB(129, 99, 251)),
           Rotation = 0,
           Transparency = NumberSequence.new({
             NumberSequenceKeypoint.new(0, 1),
