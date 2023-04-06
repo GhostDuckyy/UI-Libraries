@@ -127,7 +127,7 @@ local makefolder = makefolder or make_folder or createfolder or create_folder
 
 if not isfolder("Unnamed") then
 makefolder("Unnamed")
-
+    
 local Shadow = request({Url = "https://raw.githubusercontent.com/Rain-Design/Unnamed/main/Icons/UnnamedShadow.png", Method = "GET"})
 writefile("Unnamed/Shadow.png", Shadow.Body)
 
@@ -143,7 +143,7 @@ local SelectedTab = nil
 function  library:Darken(clr3)
 	local z,x,brightness = clr3:ToHSV()
 	brightness = math.clamp(brightness - 0.5, 0, 1)
-
+	
 	return Color3.fromHSV(z,x,brightness)
 end
 
@@ -502,7 +502,7 @@ local Minimized = false
 
 minimizeButton.MouseButton1Click:Connect(function()
     Minimized = not Minimized
-
+   
     if Minimized then
         topbar.TopbarLine.Visible = false
         mainShadow.Visible = false
@@ -569,13 +569,10 @@ containers.ScrollBarThickness = 0
 containers.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 containers.BackgroundTransparency = 1
 containers.BorderSizePixel = 0
-containers.Position = UDim2.new(0.262, 1, 0, 34)
+containers.Position = UDim2.new(0.262, 1, 0.097, 0)
 containers.Selectable = false
 containers.Size = UDim2.new(0, 368, 0, 310)
 containers.Parent = main
-
-local tabs = {}
-local tabcounter = 1
 
 function window:Tab(Info)
 Info.Text = Info.Text or "Tab"
@@ -653,9 +650,6 @@ uIPadding.PaddingBottom = UDim.new(1, 0)
 uIPadding.PaddingLeft = UDim.new(0, 6)
 uIPadding.Parent = tabContainerScrolling
 
-tabcounter = tabcounter + 1
-local tabid = tabcounter
-
 local Left = Instance.new("ScrollingFrame")
 Left.Name = "Left"
 Left.AutomaticCanvasSize = Enum.AutomaticSize.Y
@@ -663,8 +657,9 @@ Left.CanvasSize = UDim2.new()
 Left.ScrollBarThickness = 0
 Left.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Left.BackgroundTransparency = 1
+Left.Visible = false
 Left.BorderSizePixel = 0
-Left.Position = UDim2.new(0, 0, tabid, 6)
+Left.Position = UDim2.new(0, 0, 0.0195, 0)
 Left.Selectable = false
 Left.Size = UDim2.new(0, 182, 0, 306)
 Left.Parent = containers
@@ -689,12 +684,11 @@ Right.AnchorPoint = Vector2.new(1, 0)
 Right.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Right.BackgroundTransparency = 1
 Right.BorderSizePixel = 0
-Right.Position = UDim2.new(1, 0, tabid, 6)
+Right.Visible = false
+Right.Position = UDim2.new(1, 0, 0.0194, 0)
 Right.Selectable = false
 Right.Size = UDim2.new(0, 182, 0, 306)
 Right.Parent = containers
-
-tabs[#tabs + 1] = {LeftSide = Left, RightSide = Right, ID = tabid}
 
 local uIListLayout2 = Instance.new("UIListLayout")
 uIListLayout2.Name = "UIListLayout"
@@ -717,7 +711,6 @@ Info.Opened = Info.Opened or library.SectionsOpened
 Sections = Sections - 3
 
 local sectiontable = {}
-sectiontable.__index = sectiontable
 
 local section = Instance.new("Frame")
 section.Name = "Section"
@@ -804,8 +797,6 @@ itemContainer.BorderSizePixel = 0
 itemContainer.Size = UDim2.new(0, 175, 0, 0)
 itemContainer.Parent = containerHolder
 
-sectiontable.Parent = itemContainer
-
 local SectionY = 28
 local ContainerY = 0
 
@@ -827,29 +818,15 @@ local OpenedSec = false
 function sectiontable:Select()
     OpenedSec = not OpenedSec
     SectionOpened.Value = OpenedSec
-    if not OpenedSec then
-        containerHolder.Visible = false
-    end
-    if OpenedSec then
-        task.spawn(function()
-            sectionButton.BackgroundTransparency = 0
-            sectionButton.Size = UDim2.new(0, 175, 0, 35)
-            task.wait(.1)
-            sectionButton.Size = UDim2.new(0, 175, 0, 28)
-            sectionButton.BackgroundTransparency = 0
-        end)
-    end
-    TweenService:Create(section, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = OpenedSec and UDim2.new(0, 175, 0, SectionY + 5) or UDim2.new(0, 175, 0, 33)}):Play()
-    TweenService:Create(sectionFrame, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = OpenedSec and UDim2.new(0, 175, 0, SectionY) or UDim2.new(0, 175, 0, 28)}):Play()
-    TweenService:Create(containerHolder, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Position = OpenedSec and UDim2.new(0, 0, 0, 28) or UDim2.new(0, 0, 0, 0)}):Play()
-    TweenService:Create(containerHolder, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = OpenedSec and UDim2.new(0, 175, 0, ContainerY) or UDim2.new(0, 175, 0, 0)}):Play()
-    TweenService:Create(sectionIcon, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Rotation = OpenedSec and -90 or 90}):Play()
+
+    containerHolder.Visible = true
+    section.Size = OpenedSec and UDim2.new(0, 175, 0, SectionY + 5) or UDim2.new(0, 175, 0, 33)
+    sectionFrame.Size = OpenedSec and UDim2.new(0, 175, 0, SectionY) or UDim2.new(0, 175, 0, 28)
+    containerHolder.Position = OpenedSec and UDim2.new(0, 0, 0, 28) or UDim2.new(0, 0, 0, 0)
+    containerHolder.Size = OpenedSec and UDim2.new(0, 175, 0, ContainerY) or UDim2.new(0, 175, 0, 0)
+    sectionIcon.Rotation = OpenedSec and -90 or 90
     sectionIcon.Position = OpenedSec and UDim2.new(0, 156, 0, 5) or UDim2.new(0, 155, 0, 5)
-    TweenService:Create(itemContainer, TweenInfo.new(.125, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Size = OpenedSec and UDim2.new(0, 175, 0, ContainerY) or UDim2.new(0, 175, 0, 0)}):Play()
-    if OpenedSec then
-        task.wait(.125)
-        containerHolder.Visible = true
-    end
+    itemContainer.Size = OpenedSec and UDim2.new(0, 175, 0, ContainerY) or UDim2.new(0, 175, 0, 0)
 end
 
 task.spawn(function()
@@ -887,7 +864,7 @@ keybind.Name = "Keybind"
 keybind.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 keybind.BackgroundTransparency = 1
 keybind.Size = UDim2.new(0, 175, 0, 28)
-keybind.Parent = sectiontable.Parent
+keybind.Parent = itemContainer
 
 local keybindFrame = Instance.new("Frame")
 keybindFrame.Name = "KeybindFrame"
@@ -970,7 +947,7 @@ keybindOuter.Size = UDim2.new(0, TextBounds.X + 10, 0, 14)
 
 keybindOuterText:GetPropertyChangedSignal("Text"):Connect(function()
     TextBounds = keybindOuterText.TextBounds
-
+    
     keybindOuter.Size = UDim2.new(0, TextBounds.X + 10, 0, 14)
 end)
 
@@ -1014,7 +991,7 @@ if Info.Minimum > Info.Maximum then
     local ValueBefore = Info.Minimum
     Info.Minimum, Info.Maximum = Info.Maximum, ValueBefore
     end
-
+    
     Info.Default = math.clamp(Info.Default, Info.Minimum, Info.Maximum)
     local DefaultScale = (Info.Default - Info.Minimum) / (Info.Maximum - Info.Minimum)
 
@@ -1024,7 +1001,7 @@ slider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 slider.BackgroundTransparency = 1
 slider.Position = UDim2.new(0, 0, 4, 0)
 slider.Size = UDim2.new(0, 175, 0, 36)
-slider.Parent = self.Parent
+slider.Parent = itemContainer
 
 local sliderFrame = Instance.new("Frame")
 sliderFrame.Name = "sliderFrame"
@@ -1175,7 +1152,7 @@ input.Name = "Input"
 input.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 input.BackgroundTransparency = 1
 input.Size = UDim2.new(0, 175, 0, 28)
-input.Parent = self.Parent
+input.Parent = itemContainer
 
 local inputFrame = Instance.new("Frame")
 inputFrame.Name = "InputFrame"
@@ -1243,7 +1220,7 @@ dropdown.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 dropdown.BackgroundTransparency = 1
 dropdown.Position = UDim2.new(0, 0, 3, 0)
 dropdown.Size = UDim2.new(0, 175, 0, 28)
-dropdown.Parent = self.Parent
+dropdown.Parent = itemContainer
 
 local dropdownFrame = Instance.new("Frame")
 dropdownFrame.Name = "dropdownFrame"
@@ -1402,7 +1379,7 @@ dropdownElementButton.MouseButton1Click:Connect(function()
     if Info.ChangeTextOnPick then
         dropdownText.Text = dropdownElementText.Text
     end
-
+    
     TweenService:Create(dropdownFrame, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {BackgroundColor3 = Theme.ItemFrame}):Play()
     TweenService:Create(dropdownUIStroke, TweenInfo.new(.1, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), {Color = Theme.ItemUIStroke}):Play()
 
@@ -1458,7 +1435,7 @@ end
 
 SectionOpened:GetPropertyChangedSignal("Value"):Connect(function()
     DropdownOpened = false
-
+    
     if DropdownOpened then
         containerHolder.ClipsDescendants = false
     end
@@ -1478,7 +1455,7 @@ end)
 
 dropdownTextButton.MouseButton1Click:Connect(function()
     DropdownOpened = not DropdownOpened
-
+    
     if DropdownOpened then
         containerHolder.ClipsDescendants = false
     end
@@ -1518,7 +1495,7 @@ toggle.Name = "Toggle"
 toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 toggle.BackgroundTransparency = 1
 toggle.Size = UDim2.new(0, 175, 0, 28)
-toggle.Parent = self.Parent
+toggle.Parent = itemContainer
 
 local toggleFrame = Instance.new("Frame")
 toggleFrame.Name = "ToggleFrame"
@@ -1621,7 +1598,7 @@ end
 
 toggleTextButton.MouseButton1Click:Connect(function()
     Enabled = not Enabled
-
+    
     toggletable:Set(Enabled)
 end)
 
@@ -1637,7 +1614,7 @@ button.Name = "Button"
 button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 button.BackgroundTransparency = 1
 button.Size = UDim2.new(0, 175, 0, 28)
-button.Parent = self.Parent
+button.Parent = itemContainer
 
 local buttonFrame = Instance.new("Frame")
 buttonFrame.Name = "ButtonFrame"
@@ -1702,16 +1679,17 @@ end
 
 function tabtable:Select()
     if SelectedTab == tab then return end
-
+    
     SelectedTab = tab
-
+    
     task.spawn(function()
-        for _,v in next, tabs do
-            TweenService:Create(v.LeftSide, TweenInfo.new(.22, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0, 0, v.ID - tabid, 6)}):Play()
-            TweenService:Create(v.LeftSide, TweenInfo.new(.22, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Position = UDim2.new(0, 0, v.ID - tabid, 6)}):Play()
+        for _,v in next, containers:GetChildren() do
+            if v.ClassName == "ScrollingFrame" and v ~= Left and v ~= Right then
+                v.Visible = false
+            end
         end
     end)
-
+    
     task.spawn(function()
         for _,v in next, tabContainerScrolling:GetChildren() do
             if v.ClassName == "Frame" and v ~= tab then
