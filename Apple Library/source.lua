@@ -7,15 +7,45 @@ local notifs = {}
 local visible = true
 local dbcooper = false
 
-function lib:init(ti, dosplash, visiblekey, deleteprevious)
-    if gethui():FindFirstChild("ScreenGui") and deleteprevious then
-        gethui().ScreenGui.main:TweenPosition(gethui().ScreenGui.main.Position + UDim2.new(0,0,2,0), "InOut", "Quart", 0.5)
-        game:GetService("Debris"):AddItem(gethui().ScreenGui, 1)
-    end
+local function tp(ins, pos, time, thing)
+    game:GetService("TweenService"):Create(ins, TweenInfo.new(time, Enum.EasingStyle.Quart, Enum.EasingDirection.InOut),{Position = pos}):Play()
+end
 
-    -- main
-    local scrgui = Instance.new("ScreenGui")
-    scrgui.Parent = gethui()
+function lib:init(ti, dosplash, visiblekey, deleteprevious)
+    if syn then
+        
+         cg = game:GetService("CoreGui")
+        if cg:FindFirstChild("ScreenGui") and deleteprevious then
+           tp(cg.ScreenGui.main, cg.ScreenGui.main.Position + UDim2.new(0,0,2,0), 0.5)
+            game:GetService("Debris"):AddItem(cg.ScreenGui, 1)
+      end
+
+         -- main
+        scrgui = Instance.new("ScreenGui")
+        syn.protect_gui(scrgui)
+        scrgui.Parent = game:GetService("CoreGui")
+    elseif gethui then
+        if gethui():FindFirstChild("ScreenGui") and deleteprevious then
+            gethui().ScreenGui.main:TweenPosition(gethui().ScreenGui.main.Position + UDim2.new(0,0,2,0), "InOut", "Quart", 0.5)
+            game:GetService("Debris"):AddItem(gethui().ScreenGui, 1)
+        end
+
+        -- main
+         scrgui = Instance.new("ScreenGui")
+        scrgui.Parent = gethui()
+    else
+        cg = game:GetService("CoreGui")
+        if cg:FindFirstChild("ScreenGui") and deleteprevious then
+            tp(cg.ScreenGui.main, cg.ScreenGui.main.Position + UDim2.new(0,0,2,0), 0.5)
+            game:GetService("Debris"):AddItem(cg.ScreenGui, 1)
+        end
+         scrgui = Instance.new("ScreenGui")
+        scrgui.Parent = cg
+    end
+        
+    
+    
+    
 
     if dosplash then
         local splash = Instance.new("Frame")
@@ -529,9 +559,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     else
         title.Text = ""
     end
-
-    main:TweenPosition(UDim2.new(0.5, 0, 0.5, 0), "InOut", "Quart", 1)
-        
+       tp(main, UDim2.new(0.5, 0, 0.5, 0), 1)
     window = {}
 
     function window:ToggleVisible()
@@ -539,11 +567,11 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         visible = not visible
         dbcooper = true
         if visible then
-            main:TweenPosition(UDim2.new(0.5,0,0.5,0), "InOut", "Quart", 0.5, false)
+            tp(main, UDim2.new(0.5, 0, 0.5, 0), 0.5)
             task.wait(0.5)
             dbcooper = false
         else
-            main:TweenPosition(main.Position + UDim2.new(0,0,2,0), "InOut", "Quart", 0.5, false)
+            tp(main, main.Position + UDim2.new(0,0,2,0), 0.5)
             task.wait(0.5)
             dbcooper = false
         end
