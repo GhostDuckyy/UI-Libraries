@@ -36,11 +36,11 @@ local SaveManager = {} do
 		},
 		ColorPicker = {
 			Save = function(idx, object)
-				return { type = 'ColorPicker', idx = idx, value = object.Value:ToHex() }
+				return { type = 'ColorPicker', idx = idx, value = object.Value:ToHex(), transparency = object.Transparency }
 			end,
 			Load = function(idx, data)
 				if Options[idx] then 
-					Options[idx]:SetValueRGB(Color3.fromHex(data.value))
+					Options[idx]:SetValueRGB(Color3.fromHex(data.value), data.transparency)
 				end
 			end,
 		},
@@ -79,6 +79,10 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Save(name)
+		if (not name) then
+			return false, 'no config file is selected'
+		end
+
 		local fullPath = self.Folder .. '/settings/' .. name .. '.json'
 
 		local data = {
@@ -108,6 +112,10 @@ local SaveManager = {} do
 	end
 
 	function SaveManager:Load(name)
+		if (not name) then
+			return false, 'no config file is selected'
+		end
+		
 		local file = self.Folder .. '/settings/' .. name .. '.json'
 		if not isfile(file) then return false, 'invalid file' end
 
@@ -200,41 +208,35 @@ local SaveManager = {} do
 
 		section:AddDivider()
 
-		section:AddButton({
-			Text = 'Create config', 
-			Func = function()
-				local name = Options.SaveManager_ConfigName.Value
+		section:AddButton('Create config', function()
+			local name = Options.SaveManager_ConfigName.Value
 
-				if name:gsub(' ', '') == '' then 
-					return self.Library:Notify('Invalid config name (empty)', 2)
-				end
-
-				local success, err = self:Save(name)
-				if not success then
-					return self.Library:Notify('Failed to save config: ' .. err)
-				end
-
-				self.Library:Notify(string.format('Created config %q', name))
-
-				Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
-				Options.SaveManager_ConfigList:SetValues()
-				Options.SaveManager_ConfigList:SetValue(nil)
+			if name:gsub(' ', '') == '' then 
+				return self.Library:Notify('Invalid config name (empty)', 2)
 			end
-		}):AddButton({
-			Text = 'Load config', 
-			Func =  function()
-				local name = Options.SaveManager_ConfigList.Value
 
-				local success, err = self:Load(name)
-				if not success then
-					return self.Library:Notify('Failed to load config: ' .. err)
-				end
-
-				self.Library:Notify(string.format('Loaded config %q', name))
+			local success, err = self:Save(name)
+			if not success then
+				return self.Library:Notify('Failed to save config: ' .. err)
 			end
-		})
 
-		section:AddButton({ Text = 'Overwrite config', Func = function()
+			self.Library:Notify(string.format('Created config %q', name))
+
+			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
+			Options.SaveManager_ConfigList:SetValues()
+			Options.SaveManager_ConfigList:SetValue(nil)
+		end):AddButton('Load config', function()
+			local name = Options.SaveManager_ConfigList.Value
+
+			local success, err = self:Load(name)
+			if not success then
+				return self.Library:Notify('Failed to load config: ' .. err)
+			end
+
+			self.Library:Notify(string.format('Loaded config %q', name))
+		end)
+
+		section:AddButton('Overwrite config', function()
 			local name = Options.SaveManager_ConfigList.Value
 
 			local success, err = self:Save(name)
@@ -243,20 +245,20 @@ local SaveManager = {} do
 			end
 
 			self.Library:Notify(string.format('Overwrote config %q', name))
-		end })
+		end)
 		
-		section:AddButton({ Text = 'Autoload config', Func = function()
+		section:AddButton('Autoload config', function()
 			local name = Options.SaveManager_ConfigList.Value
 			writefile(self.Folder .. '/settings/autoload.txt', name)
 			SaveManager.AutoloadLabel:SetText('Current autoload config: ' .. name)
 			self.Library:Notify(string.format('Set %q to auto load', name))
-		end })
+		end)
 
-		section:AddButton({ Text = 'Refresh config list', Func = function()
+		section:AddButton('Refresh config list', function()
 			Options.SaveManager_ConfigList.Values = self:RefreshConfigList()
 			Options.SaveManager_ConfigList:SetValues()
 			Options.SaveManager_ConfigList:SetValue(nil)
-		end })
+		end)
 
 		SaveManager.AutoloadLabel = section:AddLabel('Current autoload config: none', true)
 
