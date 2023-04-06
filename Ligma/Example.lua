@@ -3,7 +3,7 @@
 
 local library = loadstring(syn.request({
   Method = "GET",
-  Url = "https://wednesday.wtf/ars/library.lua"
+  Url = "https://wednesday.wtf/library.lua"
 }).Body)()
 
 local window = library:new_window("liga ui lib", nil, nil)
