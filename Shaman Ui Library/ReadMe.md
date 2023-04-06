@@ -9,8 +9,8 @@ Made by [**ZCute**](https://v3rmillion.net/member.php?action=profile&uid=1431869
 [Docs](https://github.com/GhostDuckyy/Ui-Librarys/tree/main/Shaman%20Ui%20Library#documentation) | [Example](https://github.com/GhostDuckyy/Ui-Librarys/tree/main/Shaman%20Ui%20Library#example)
 
 ### Picture:
-![photo 1](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_1.png)
-![photo 2](https://ghostduckyy.github.io/Duckyy.github.io/ImageHost/Shaman_pic_2.png)
+![photo 1](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.vgy.me%2FcOo65A.png)
+![photo 2](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.vgy.me%2FpnDNX8.png)
 
 ### Documentation:
 ```cs
