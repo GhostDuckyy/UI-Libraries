@@ -1,4 +1,4 @@
-local library = loadstring(game:HttpGet("https://github.com/GhostDuckyy/UI-Libraries/blob/main/VELOCITY.VIP/source.lua"))() do --// ui main
+local library = loadstring(game:HttpGet("https://github.com/GhostDuckyy/UI-Libraries/blob/main/Velocity.vip/source.lua"))() do --// ui main
     local ui = {} do
         ui.window = library.init_window("Window", {size = Vector2.new(600, 420), name = "anis private cracked 2023 $$$ :troll:", drag_tween = true})
         ui.pages = {} do
