@@ -25,7 +25,7 @@ tab:Colorpicker("Colorpicker",Color3.fromRGB(255, 1, 1),function(t)
   print(t)
 end)
 
-ss:Textbox("Textbox", true,function(t)
+tab:Textbox("Textbox", true,function(t)
   print(t)
 end)
 
