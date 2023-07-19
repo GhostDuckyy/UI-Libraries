@@ -1,6 +1,10 @@
-# Documentation
+# ReadMe
+
+## Preview
+![a](https://github.com/GhostDuckyy/UI-Libraries/blob/main/Gerad's/image.png?raw=true)
+## Documentation
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librarys/main/Gerad's/Source.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/Ui-Librarys/main/Gerad's/source.lua"))()
 
 local Window = Library:CreateWindow('Gerad') -- :CreateWindow(Title)
 
