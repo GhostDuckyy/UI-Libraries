@@ -445,6 +445,7 @@ Library.Icons = {
 ```
 Here is an example of what the default warning `Library.Icons.Warning` looks like in-game:
 ![a](https://docs.siegehub.net/DocsAssets/images/warning.png)
+
 Here is an example of what hovering over these look like:
 ![b](https://docs.siegehub.net/DocsAssets/images/warningHover.png)
 **Please remember that this is a very early release, so there are likely to be bugs, typos, and other problems regarding Atlas and this documentation. If you have feedback or want to report a bug/typo, join our discord server in the topbar of this page and let us know. Thanks!**
