@@ -789,7 +789,9 @@ Iris._globalRefreshRequested = false -- UpdatingGlobalConfig changes this to tru
 --- Ideally, the DemoWindow should always be available in your UI.
 Iris.ShowDemoWindow = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Misc/demoWindow.lua"))(Iris)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Misc/WidgetUtility.lua"))(Iris)
+local WidgetUtility = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Misc/WidgetUtility.lua")) do
+    (WidgetUtility)(Iris)
+end
 
 --- @class Widgets
 --- Each widget is available through Iris.<widget name\>
