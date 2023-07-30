@@ -418,4 +418,6 @@ return function(Iris: Types.Iris)
 	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Text.lua")       (Iris, widgets)
 	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Tree.lua")       (Iris, widgets)
 	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Window.lua")     (Iris, widgets)
+
+    Iris._widgets = widgets
 end
