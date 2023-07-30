@@ -397,25 +397,23 @@ return function(Iris: Types.Iris)
 	
 	local function load(url)
 		local func = loadstring(game:HttpGet( tostring(url) ))()
-		
+
 		if type(func) == "function" then
-			return func
+			(func)(Iris, widgets)
 		else
-			return function(...)
-				error("Failed to load Wedgets")
-			end
+			error("Failed to load Wedgets")
 		end
 	end
 
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Button.lua")     (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Checkbox.lua")   (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Combo.lua")      (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Format.lua")     (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Input.lua")   	 (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/RadioButton.lua")(Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Root.lua")       (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Table.lua")      (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Text.lua")       (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Tree.lua")       (Iris, widgets)
-	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Window.lua")     (Iris, widgets)
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Button.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Checkbox.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Combo.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Format.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Input.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/RadioButton.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Root.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Table.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Text.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Tree.lua")
+	load("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/ImGui/Iris/Versions/2.0.5/Wedgets/Window.lua")
 end
