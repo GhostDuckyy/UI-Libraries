@@ -3,7 +3,7 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/oShyy
 
 local Legit = library:AddWindow('Legit')
 local Rage = library:AddWindow('Rage')
-local Anti-Aim = library:AddWindow('Anti-Aim')
+local Anti_Aim = library:AddWindow('Anti-Aim')
 local watermark = library:AddWatermark('');
 
 
